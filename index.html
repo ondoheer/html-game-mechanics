@@ -1,48 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Mechanics</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
+  <body>
     <h1>Mechanics</h1>
     <section id="game">
+      <canvas id="mundo" width="500px"></canvas>
 
+      <!-- <div id="mundo">
+        <div id="personaje"></div>
+      </div> -->
+      <div id="instrucciones">
+        <h2>Instrucciones</h2>
+        <ul>
+          <li><strong> Dispara:</strong> "mouse izquierdo"</li>
+          <li><strong>Izquierda: </strong> tecla "A"</li>
+          <li><strong>Derecha: </strong> tecla "D"</li>
+          <li><strong>Saltar: </strong> tecla "espacio"</li>
+        </ul>
+        <div>
+          <h3>Notas</h3>
+          <p>
+            Debido a un intento de ponerle un state machine y a encapsular todos
+            los eventos de tecla de movimiento en una función, no escucha dos
+            instrucciones al mismo tiempo si las das con el teclado.
 
-
-        <div id="mundo">
-
-            <div id="personaje"></div>
-
+            <strong>Necesito pasar esto a Canvas</strong>.
+          </p>
         </div>
-        <div id="instrucciones">
-            <h2>Instrucciones</h2>
-            <ul>
-                <li><strong> Dispara:</strong> "mouse izquierdo"</li>
-                <li><strong>Izquierda: </strong> tecla "A"</li>
-                <li><strong>Derecha: </strong> tecla "D"</li>
-                <li><strong>Saltar: </strong> tecla "espacio"</li>
-            </ul>
-            <div>
-                <h3>Notas</h3>
-                <p>Debido a un intento de ponerle un state machine y a encapsular todos los eventos de tecla de
-                    movimiento en una función, no escucha dos instrucciones al mismo tiempo si las das con el teclado.
-
-                    <strong>Necesito pasar esto a Canvas</strong>.</p>
-            </div>
-        </div>
-
-
-
-
-
+      </div>
     </section>
-    <script src="main.js"></script>
-</body>
-
+    <script src="./main.js"></script>
+    <script src="./game.js"></script>
+  </body>
 </html>

@@ -1,76 +1,75 @@
-body{
-    background-color: cadetblue;
+body {
+  background-color: cadetblue;
 }
 
-h1,h2,h3,h4{
-    color:crimson; 
+h1,
+h2,
+h3,
+h4 {
+  color: crimson;
 }
 
-.animaciones{
-    display: grid;
-    grid-template-columns: repeat( 4, minmax(320px, 1fr));
-    grid-column-gap: 1vw;
-
+.animaciones {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(320px, 1fr));
+  grid-column-gap: 1vw;
 }
 
-
-
- #mundo{
-    background-color: black;
-    padding: 0px;
-    min-height: 160px;
-    position: relative;
-    border-bottom: 30px coral solid;
-    overflow: hidden;
-    
+#mundo {
+  background-color: #000;
+  padding: 0px;
+  min-height: 160px;
+  position: relative;
+  border-bottom: 30px coral solid;
+  overflow: hidden;
 }
 
-#instrucciones{
-    background-color: antiquewhite;
-    padding: 10px;
+#instrucciones {
+  background-color: antiquewhite;
+  padding: 10px;
 }
 
-#personaje{
-    height: 50px;
-    width: 50px;
-    background-color: brown;
-    position: absolute;
-    bottom: 0;
+#personaje {
+  height: 50px;
+  width: 50px;
+  background-color: brown;
+  position: absolute;
+  bottom: 0;
 }
 
-button{
-    width: 100%;
-    padding: 30px;
-    text-align: center;
-    background-color: transparent;
-    border: none;
-    color: crimson;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
+button {
+  width: 100%;
+  padding: 30px;
+  text-align: center;
+  background-color: transparent;
+  border: none;
+  color: crimson;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.bala{
-    position: absolute;
-    bottom: 30px;
+.bala {
+  position: absolute;
+  bottom: 30px;
+  left: 50px;
+  height: 3px;
+  width: 6px;
+  background-color: blanchedalmond;
+  animation: bala 0.5s linear;
+  visibility: hidden;
+}
+
+.salto {
+  animation: salto 0.5s ease-in;
+}
+@keyframes bala {
+  0% {
     left: 50px;
-    height: 3px;
-    width: 6px;
-    background-color: blanchedalmond;
-    animation: bala .5s linear;
-    visibility: hidden;
-}
+    visibility: visible;
+  }
 
-.salto{
-    animation: salto .5s ease-in;
-}
-@keyframes bala{
-    0%{
-        left:50px;
-        visibility: visible;
-    }
-
-    /* 25%{
+  /* 25%{
         bottom: 25%;
     }
     50%{
@@ -79,34 +78,32 @@ button{
     75%{
         bottom: 30px;
     } */
-    
 
-    100%{
-        left: 2000%;
-
-    }
+  100% {
+    left: 2000%;
+  }
 }
 
-@keyframes salto{
-    0%{
-        transition: all .5s;
-        left: 10px;
-    }
-    25%{
-        bottom: 100px;
-        transition: all .5s;
-        left: 100px;
-        background-color: greenyellow;
-    }
-    50%{
-        bottom: 0;
-        left: 200px;
-        transition: all .5s;
-        background-color: purple;
-    }
-    100%{
-        bottom: 0;
-        left: 10px;
-        transition: all .5s;
-    }
+@keyframes salto {
+  0% {
+    transition: all 0.5s;
+    left: 10px;
+  }
+  25% {
+    bottom: 100px;
+    transition: all 0.5s;
+    left: 100px;
+    background-color: greenyellow;
+  }
+  50% {
+    bottom: 0;
+    left: 200px;
+    transition: all 0.5s;
+    background-color: purple;
+  }
+  100% {
+    bottom: 0;
+    left: 10px;
+    transition: all 0.5s;
+  }
 }
