@@ -4,5 +4,6 @@ export var state = {
     right: false,
     jump: false,
     shoot: false
-  }
+  },
+  isJumping: false
 };

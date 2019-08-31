@@ -2,12 +2,14 @@ import { Hero } from "./characters/Hero.js";
 
 import { keydown, keyup } from "./controls.js";
 
+import { debug } from "./debugger.js";
+
 export const canvas = document.getElementById("mundo");
 export const ctx = canvas.getContext("2d");
 export const canvasWidth = canvas.width;
 export const canvasHeight = canvas.height;
 
-let hero = new Hero();
+export let hero = new Hero();
 
 // General Game draw
 function gameDraw() {
@@ -29,7 +31,9 @@ function loop(timestamp) {
   gameDraw();
 
   lastRender = timestamp;
+
   window.requestAnimationFrame(loop);
+  //debug();
 }
 // this is only used the first time
 var lastRender = 0;

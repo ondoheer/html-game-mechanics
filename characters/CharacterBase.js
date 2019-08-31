@@ -1,4 +1,4 @@
-import { CHARACTER_SIZE } from "../config/general.js";
+import { CHARACTER_SIZE } from "../config/character.js";
 
 export class CharacterBase {
   constructor(
@@ -6,7 +6,7 @@ export class CharacterBase {
     y = 100,
     size = CHARACTER_SIZE,
     color = "brown",
-    speed = 16
+    speed = 5
   ) {
     this.x = x;
     this.y = y;
