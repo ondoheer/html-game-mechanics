@@ -1,24 +1,24 @@
-import { Personaje } from "./characters/personaje.js";
+import { Hero } from "./characters/Hero.js";
 
-const canvas = document.getElementById("mundo");
-const ctx = canvas.getContext("2d");
-const canvasWidth = canvas.width;
-const canvasHeight = canvas.height;
+import { keydown, keyup } from "./controls.js";
 
-let p = new Personaje();
-let p2 = new Personaje(50, 50, 50, "blue");
+export const canvas = document.getElementById("mundo");
+export const ctx = canvas.getContext("2d");
+export const canvasWidth = canvas.width;
+export const canvasHeight = canvas.height;
+
+let hero = new Hero();
 
 // General Game draw
 function gameDraw() {
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-  p.draw(ctx);
-  p2.draw(ctx);
+  hero.draw(ctx);
 }
 // General Game update
 function update(progress) {
-  ctx.save();
-  p.x += 50;
-  ctx.restore();
+  //ctx.save();
+  hero.update(progress);
+  //ctx.restore();
 }
 
 // General game loop
@@ -35,3 +35,6 @@ function loop(timestamp) {
 var lastRender = 0;
 gameDraw();
 window.requestAnimationFrame(loop);
+
+window.addEventListener("keydown", keydown, false);
+window.addEventListener("keyup", keyup, false);
