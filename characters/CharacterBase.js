@@ -8,6 +8,9 @@ export class CharacterBase {
     color = "brown",
     speed = 5
   ) {
+    this.state = {
+      isJumping: false
+    };
     this.x = x;
     this.y = y;
     (this.size = size), (this.color = color), (this.speed = speed);

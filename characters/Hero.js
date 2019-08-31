@@ -44,10 +44,10 @@ export class Hero extends CharacterBase {
    * necesito otra forma de controlar el máximo salto y el estado
    */
   jump() {
-    state.isJumping = true;
+    this.state.isJumping = true;
     this.y -= this.jumpSpeed;
     if (this.reachedMaxJumpHeight()) {
-      state.isJumping = false;
+      this.state.isJumping = false;
     }
   }
 
@@ -59,7 +59,7 @@ export class Hero extends CharacterBase {
    *
    */
   update() {
-    if (!this.isStandingOnGround() && !state.isJumping) {
+    if (!this.isStandingOnGround() && !this.state.isJumping) {
       this.y += this.jumpSpeed;
     }
     if (state.pressedKeys.right && !this.reachedRightBoundary()) {
