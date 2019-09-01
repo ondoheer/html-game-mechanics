@@ -130,10 +130,10 @@ export class Hero extends CharacterBase {
         this.jump();
         break;
       case JUMP_RELEASED:
-        // this.forceGravity();
+        // unused now, helps with special stuff done while in the air;
         break;
       default:
-        // this.forceGravity();
+        // unused now;
         break;
     }
   }
