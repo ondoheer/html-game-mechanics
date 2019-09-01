@@ -9,10 +9,9 @@ export class CharacterBase {
     color = "brown",
     speed = 5
   ) {
-    this.state = {
+    this._state = {
       isJumping: false,
-      isFalling: false,
-      isGrounded: true
+      isFalling: false
     };
     this.x = x;
     this.y = y;

@@ -52,15 +52,24 @@ export class Hero extends CharacterBase {
    * necesito otra forma de controlar el máximo salto y el estado
    */
   jump() {
-    this.y -= this.jumpSpeed;
-
-    if (this.reachedMaxJumpHeight()) {
-      this.state.isJumping = false;
-      this.state.isFalling = true;
+    if (!this.reachedMaxJumpHeight()) {
+      this.yVelocity = -this.jumpSpeed;
+      this._state.isJumping = true;
     }
   }
-  stopMoving() {
-    this.xVelocity = 0;
+  stopJumping() {
+    this.yVelocity = 0;
+    this._state.isJumping = false;
+    this._state.isFalling = true;
+  }
+  fall() {
+    if (!this.isStandingOnGround()) {
+      this.yVelocity = this.jumpSpeed;
+    }
+  }
+  stopFalling() {
+    this.yVelocity = 0;
+    this._state.isFalling = false;
   }
   moveRight() {
     if (!this.reachedRightBoundary()) {
@@ -76,38 +85,37 @@ export class Hero extends CharacterBase {
       this.stopMoving();
     }
   }
-  updatePosition() {
+  stopMoving() {
+    this.xVelocity = 0;
+  }
+  updateCoordSpeeds() {
     this.x += this.xVelocity;
     this.y += this.yVelocity;
   }
-  handleInput() {
-    // finite state machine
-    // if (this.state.isGrounded || this.state.isJumping) {
-    //   if (state.pressedKeys.jump) {
-    //     this.state.isJumping = true;
-    //     this.state.isGrounded = false;
-    //     this.jump();
-    //   }
-    // } else if (this.state.isFalling) {
-    //   this.y += this.jumpSpeed;
-    //   if (this.isStandingOnGround()) {
-    //     this.state.isFalling = false;
-    //     this.state.isGrounded = true;
-    //   }
-    // }
+  // this should be part of the world
+  updateGravity() {
+    if (this.reachedMaxJumpHeight()) {
+      this.stopJumping();
+    }
+    if (this._state.isFalling) {
+      this.fall();
+    }
+    if (this.isStandingOnGround()) {
+      this.stopFalling();
+    }
   }
-  /**
-   * Ahora no estoy usando el progress porque prefiero darle un speed
-   * al personaje, pero se le podría pasar como parámetro si queremos
-   * que el movimiento cambie según el clockspeed
-   * Aquí actualizamos la posición del personaje en pantalla
-   *
-   */
-  update() {
-    this.handleInput();
+  updatePosition() {
+    this.updateCoordSpeeds();
+    this.updateGravity();
+  }
+  handleInput() {
+    if (state.input !== undefined) {
+      console.log(state.input);
+    }
     switch (state.input) {
       case MOVE_RIGHT_PRESSED:
         this.moveRight();
+
         break;
       case MOVE_RIGHT_RELEASED:
         this.stopMoving();
@@ -117,10 +125,23 @@ export class Hero extends CharacterBase {
         break;
       case MOVE_LEFT_RELEASED:
         this.stopMoving();
+        break;
+      case JUMP_PRESSED:
+        this.jump();
+        break;
+      case JUMP_RELEASED:
+        // this.forceGravity();
+        break;
       default:
+        // this.forceGravity();
         break;
     }
+  }
 
+  update() {
+    this.handleInput();
     this.updatePosition();
+    // reset input state
+    state.input = undefined;
   }
 }
