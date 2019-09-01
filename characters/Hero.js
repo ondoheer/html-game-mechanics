@@ -2,6 +2,14 @@ import { CharacterBase } from "./CharacterBase.js";
 import { JUMP_SPEED, JUMP_MAX_HEIGHT } from "../config/character.js";
 import { state } from "../state.js";
 import { canvasWidth, canvasHeight } from "../game.js";
+import {
+  MOVE_LEFT_PRESSED,
+  MOVE_RIGHT_PRESSED,
+  MOVE_LEFT_RELEASED,
+  MOVE_RIGHT_RELEASED,
+  JUMP_PRESSED,
+  JUMP_RELEASED
+} from "../controls.js";
 
 export class Hero extends CharacterBase {
   constructor() {
@@ -44,13 +52,50 @@ export class Hero extends CharacterBase {
    * necesito otra forma de controlar el máximo salto y el estado
    */
   jump() {
-    this.state.isJumping = true;
     this.y -= this.jumpSpeed;
+
     if (this.reachedMaxJumpHeight()) {
       this.state.isJumping = false;
+      this.state.isFalling = true;
     }
   }
-
+  stopMoving() {
+    this.xVelocity = 0;
+  }
+  moveRight() {
+    if (!this.reachedRightBoundary()) {
+      this.xVelocity = this.speed;
+    } else {
+      this.stopMoving();
+    }
+  }
+  moveLeft() {
+    if (!this.reachedLeftBoundary()) {
+      this.xVelocity = -this.speed;
+    } else {
+      this.stopMoving();
+    }
+  }
+  updatePosition() {
+    this.x += this.xVelocity;
+    this.y += this.yVelocity;
+  }
+  handleInput() {
+    // finite state machine
+    // if (this.state.isGrounded || this.state.isJumping) {
+    //   if (state.pressedKeys.jump) {
+    //     this.state.isJumping = true;
+    //     this.state.isGrounded = false;
+    //     this.jump();
+    //   }
+    // } else if (this.state.isFalling) {
+    //   this.y += this.jumpSpeed;
+    //   if (this.isStandingOnGround()) {
+    //     this.state.isFalling = false;
+    //     this.state.isGrounded = true;
+    //   }
+    // }
+  }
   /**
    * Ahora no estoy usando el progress porque prefiero darle un speed
    * al personaje, pero se le podría pasar como parámetro si queremos
@@ -59,17 +104,23 @@ export class Hero extends CharacterBase {
    *
    */
   update() {
-    if (!this.isStandingOnGround() && !this.state.isJumping) {
-      this.y += this.jumpSpeed;
+    this.handleInput();
+    switch (state.input) {
+      case MOVE_RIGHT_PRESSED:
+        this.moveRight();
+        break;
+      case MOVE_RIGHT_RELEASED:
+        this.stopMoving();
+        break;
+      case MOVE_LEFT_PRESSED:
+        this.moveLeft();
+        break;
+      case MOVE_LEFT_RELEASED:
+        this.stopMoving();
+      default:
+        break;
     }
-    if (state.pressedKeys.right && !this.reachedRightBoundary()) {
-      this.x += this.speed;
-    }
-    if (state.pressedKeys.left && !this.reachedLeftBoundary()) {
-      this.x -= this.speed;
-    }
-    if (state.pressedKeys.jump) {
-      this.jump();
-    }
+
+    this.updatePosition();
   }
 }

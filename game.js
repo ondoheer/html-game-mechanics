@@ -19,7 +19,7 @@ function gameDraw() {
 // General Game update
 function update(progress) {
   //ctx.save();
-  hero.update(progress);
+  hero.update();
   //ctx.restore();
 }
 
