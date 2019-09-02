@@ -8,7 +8,8 @@ import {
   MOVE_LEFT_RELEASED,
   MOVE_RIGHT_RELEASED,
   JUMP_PRESSED,
-  JUMP_RELEASED
+  JUMP_RELEASED,
+  MOUSE_CLICKED
 } from "../controls.js";
 
 export class Hero extends CharacterBase {
@@ -92,6 +93,7 @@ export class Hero extends CharacterBase {
     this.x += this.xVelocity;
     this.y += this.yVelocity;
   }
+
   // this should be part of the world
   updateGravity() {
     if (this.reachedMaxJumpHeight()) {
@@ -131,6 +133,8 @@ export class Hero extends CharacterBase {
         break;
       case JUMP_RELEASED:
         // unused now, helps with special stuff done while in the air;
+        break;
+      case MOUSE_CLICKED:
         break;
       default:
         // unused now;

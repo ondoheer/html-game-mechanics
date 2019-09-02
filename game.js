@@ -1,7 +1,7 @@
 import { Hero } from "./characters/Hero.js";
-
-import { keydown, keyup } from "./controls.js";
-
+import { DrawManager } from "./managers/DrawManager.js";
+import { keydown, keyup, mouseclick } from "./controls.js";
+import { NormalBullet } from "./props/Bullet.js";
 import { debug } from "./debugger.js";
 
 export const canvas = document.getElementById("mundo");
@@ -10,11 +10,13 @@ export const canvasWidth = canvas.width;
 export const canvasHeight = canvas.height;
 
 export let hero = new Hero();
+let bullet = new NormalBullet(50, 125);
+let drawManager = new DrawManager(hero, [bullet]);
 
 // General Game draw
 function gameDraw() {
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-  hero.draw(ctx);
+  drawManager.draw(ctx);
 }
 // General Game update
 function update(progress) {
@@ -42,3 +44,4 @@ window.requestAnimationFrame(loop);
 
 window.addEventListener("keydown", keydown, false);
 window.addEventListener("keyup", keyup, false);
+window.addEventListener("click", mouseclick, false);

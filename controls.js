@@ -1,5 +1,5 @@
 import { state } from "./state.js";
-
+import { NormalBullet } from "./props/Bullet.js";
 export const KEY_MAP = {
   KeyD: "MOVE_RIGHT",
   KeyA: "MOVE_LEFT",
@@ -13,6 +13,7 @@ export const JUMP_PRESSED = "JUMP_PRESSED";
 export const MOVE_LEFT_RELEASED = "MOVE_LEFT_RELEASED";
 export const MOVE_RIGHT_RELEASED = "MOVE_RIGHT_RELEASED";
 export const JUMP_RELEASED = "JUMP_RELEASED";
+export const MOUSE_CLICKED = "MOUSE_CLICKED";
 
 export function keydown(event) {
   state.input = `${KEY_MAP[event.code]}_PRESSED`;
@@ -20,3 +21,10 @@ export function keydown(event) {
 export function keyup(event) {
   state.input = `${KEY_MAP[event.code]}_RELEASED`;
 }
+
+export function mouseclick(event) {
+  // decidir si necesito que entre al state machine
+  state.input = MOUSE_CLICKED;
+}
+
+export const shoot = (x, y) => new NormalBullet(x, y);
