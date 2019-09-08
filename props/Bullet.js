@@ -7,8 +7,10 @@ class BulletBase {
     this.color = color;
     this.width = width;
     this.height = height;
+
     this.xVelocity = 0;
     this.yVelocity = 0;
+    this.exists = true;
   }
   setTravelSpeedRight() {
     this.xVelocity = this.speed;
@@ -20,6 +22,9 @@ class BulletBase {
     this.x += this.xVelocity;
     this.y += this.yVelocity;
   }
+  disable() {
+    this.exists = false;
+  }
   update() {
     /** va a requerir más funciones como updetear si debería seguir en pantalla */
     if (this.iteration > 0 && this.iteration < 2) {
@@ -27,6 +32,7 @@ class BulletBase {
     }
     this.iteration++;
     this.travel();
+    //this.disable();
   }
 }
 

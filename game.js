@@ -11,7 +11,8 @@ export const canvasHeight = canvas.height;
 
 export let hero = new Hero();
 let bullet = new NormalBullet(50, 125);
-let drawManager = new DrawManager(hero, [bullet]);
+let bullet2 = new NormalBullet(50, 125);
+let drawManager = new DrawManager(hero, [bullet, bullet2]);
 
 // General Game draw
 function gameDraw() {

@@ -9,17 +9,22 @@ export class DrawManager {
     ctx.fillStyle = this.hero.color;
     ctx.fillRect(this.hero.x, this.hero.y, this.hero.size, this.hero.size);
   }
-  drawBullet(ctx) {
-    ctx.fillStyle = this.bullets[0].color;
-    ctx.fillRect(
-      this.bullets[0].x,
-      this.bullets[0].y,
-      this.bullets[0].width,
-      this.bullets[0].height
-    );
+  drawBullet(ctx, bullet) {
+    ctx.fillStyle = bullet.color;
+    ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+  }
+  drawExistingBullets(ctx) {
+    this.bullets[1].exists = false;
+    const bulletsToDraw = this.bullets.filter(bullet => bullet.exists === true); // this has to move so that only instantiated bullets appear here;
+
+    for (let i = 0; i < bulletsToDraw.length; i++) {
+      const bullet = bulletsToDraw[i];
+
+      this.drawBullet(ctx, bullet);
+    }
   }
   draw(ctx) {
     this.drawHero(ctx);
-    this.drawBullet(ctx);
+    this.drawExistingBullets(ctx);
   }
 }
