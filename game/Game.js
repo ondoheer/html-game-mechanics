@@ -18,7 +18,7 @@ export class Game {
     this.hero = new Hero();
     this.bulletsPool = this.bulletFactory.produceBullets();
     this.bulletsBeenShown = [];
-    this.drawManager = new DrawManager(this.hero, this.bulletsPool);
+    this.drawManager = new DrawManager();
   }
 
   init() {
@@ -45,7 +45,7 @@ export class Game {
 
   gameDraw() {
     this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
-    this.drawManager.draw(this.ctx);
+    this.drawManager.draw(this.ctx, this.hero, this.bulletsBeenShown);
   }
 
   update(progress) {
