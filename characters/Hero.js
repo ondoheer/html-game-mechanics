@@ -89,6 +89,17 @@ export class Hero extends CharacterBase {
   stopMoving() {
     this.xVelocity = 0;
   }
+  /**
+   * There the bullets will spawn from.animacionesIt always should be the middle of the character
+   */
+  getShootingPosition() {
+    const rightLimit = this.x + this.size;
+    const midSection = this.y - this.size;
+    return { rightLimit, midSection };
+  }
+  shoot() {
+    console.log(this.getShootingPosition());
+  }
   updateCoordSpeeds() {
     this.x += this.xVelocity;
     this.y += this.yVelocity;
@@ -110,40 +121,8 @@ export class Hero extends CharacterBase {
     this.updateCoordSpeeds();
     this.updateGravity();
   }
-  handleInput() {
-    // if (state.input !== undefined) {
-    //   console.log(state.input);
-    // }
-    switch (state.input) {
-      case MOVE_RIGHT_PRESSED:
-        this.moveRight();
-
-        break;
-      case MOVE_RIGHT_RELEASED:
-        this.stopMoving();
-        break;
-      case MOVE_LEFT_PRESSED:
-        this.moveLeft();
-        break;
-      case MOVE_LEFT_RELEASED:
-        this.stopMoving();
-        break;
-      case JUMP_PRESSED:
-        this.jump();
-        break;
-      case JUMP_RELEASED:
-        // unused now, helps with special stuff done while in the air;
-        break;
-      case MOUSE_CLICKED:
-        break;
-      default:
-        // unused now;
-        break;
-    }
-  }
 
   update() {
-    this.handleInput();
     this.updatePosition();
     // reset input state
     state.input = undefined;

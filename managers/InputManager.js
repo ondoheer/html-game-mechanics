@@ -35,7 +35,7 @@ export class InputManager {
         // unused now, helps with special stuff done while in the air;
         break;
       case MOUSE_CLICKED:
-        console.log("clicked");
+        this.hero.shoot();
       default:
         // unused now;
         break;

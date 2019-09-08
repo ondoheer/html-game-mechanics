@@ -23,12 +23,5 @@ export function keyup(event) {
 }
 
 export function mouseclick(event) {
-  // decidir si necesito que entre al state machine
   state.input = MOUSE_CLICKED;
-
-  shoot();
 }
-
-export const shoot = () => {
-  console.log("shoot");
-};
