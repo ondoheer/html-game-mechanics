@@ -1,7 +1,7 @@
 import { CharacterBase } from "./CharacterBase.js";
 import { JUMP_SPEED, JUMP_MAX_HEIGHT } from "../config/character.js";
 import { state } from "../state.js";
-import { canvasWidth, canvasHeight } from "../game.js";
+import { canvasWidth, canvasHeight } from "../main.js";
 import {
   MOVE_LEFT_PRESSED,
   MOVE_RIGHT_PRESSED,
