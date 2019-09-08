@@ -111,9 +111,9 @@ export class Hero extends CharacterBase {
     this.updateGravity();
   }
   handleInput() {
-    if (state.input !== undefined) {
-      console.log(state.input);
-    }
+    // if (state.input !== undefined) {
+    //   console.log(state.input);
+    // }
     switch (state.input) {
       case MOVE_RIGHT_PRESSED:
         this.moveRight();

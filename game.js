@@ -22,6 +22,7 @@ function gameDraw() {
 function update(progress) {
   //ctx.save();
   hero.update();
+  bullet.update();
   //ctx.restore();
 }
 

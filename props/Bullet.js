@@ -7,11 +7,26 @@ class BulletBase {
     this.color = color;
     this.width = width;
     this.height = height;
+    this.xVelocity = 0;
+    this.yVelocity = 0;
   }
-
-  draw(ctx) {
-    ctx.fillStyle = this.color;
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+  setTravelSpeedRight() {
+    this.xVelocity = this.speed;
+  }
+  setTravelSpeedLEft() {
+    this.yVelocity -= this.speed;
+  }
+  travel() {
+    this.x += this.xVelocity;
+    this.y += this.yVelocity;
+  }
+  update() {
+    /** va a requerir más funciones como updetear si debería seguir en pantalla */
+    if (this.iteration > 0 && this.iteration < 2) {
+      this.setTravelSpeedRight();
+    }
+    this.iteration++;
+    this.travel();
   }
 }
 
