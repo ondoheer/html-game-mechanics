@@ -1,5 +1,6 @@
 import { DrawManager } from "../managers/DrawManager.js";
 import { keydown, keyup, mouseclick } from "../controls.js";
+import { BulletFactory } from "../factories/BulletFactory.js";
 
 // testing
 import { NormalBullet } from "../gameItems/Bullet.js";
@@ -13,9 +14,11 @@ export class Game {
     this.canvasHeight = this.canvas.height;
     this.lastRender = 0;
 
+    this.bulletFactory = new BulletFactory();
     this.hero = new Hero();
-    this.bullets = [new NormalBullet(50, 125), new NormalBullet(50, 125)];
-    this.drawManager = new DrawManager(this.hero, this.bullets);
+    this.bulletsPool = this.bulletFactory.produceBullets();
+    this.bulletsBeenShown = [];
+    this.drawManager = new DrawManager(this.hero, this.bulletsPool);
   }
 
   init() {
@@ -49,7 +52,7 @@ export class Game {
     //ctx.save();
 
     this.hero.update();
-    // bullet.update();
+    this.bulletsPool[0].update();
     //ctx.restore();
   }
 }
