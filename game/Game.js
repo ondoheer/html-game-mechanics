@@ -1,6 +1,7 @@
 import { DrawManager } from "../managers/DrawManager.js";
-import { keydown, keyup, mouseclick } from "../controls.js";
+import { keydown, keyup, mouseclick, MOUSE_CLICKED } from "../controls.js";
 import { BulletFactory } from "../factories/BulletFactory.js";
+import { state } from "../state.js";
 
 // testing
 
@@ -47,12 +48,23 @@ export class Game {
     this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
     this.drawManager.draw(this.ctx, this.hero, this.bulletsDisplayed);
   }
+  handleInput() {
+    switch (state.input) {
+      case MOUSE_CLICKED:
+        console.log("clicked");
 
+      default:
+        break;
+    }
+  }
   update(progress) {
     //ctx.save();
-
+    this.handleInput();
     this.hero.update();
-    this.bulletsPool[0].update();
+    for (let bullet = 0; bullet < this.bulletsDisplayed.length; bullet++) {
+      this.bulletsDisplayed[bullet].update();
+    }
+
     //ctx.restore();
   }
 }
