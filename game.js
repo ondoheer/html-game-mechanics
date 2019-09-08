@@ -1,7 +1,7 @@
 import { Hero } from "./characters/Hero.js";
 import { DrawManager } from "./managers/DrawManager.js";
 import { keydown, keyup, mouseclick } from "./controls.js";
-import { NormalBullet } from "./props/Bullet.js";
+import { NormalBullet } from "./gameItems/Bullet.js";
 import { debug } from "./debugger.js";
 
 export const canvas = document.getElementById("mundo");
