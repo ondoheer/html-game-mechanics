@@ -1,4 +1,5 @@
 import { DrawManager } from "../managers/DrawManager.js";
+import { InputManager } from "../managers/InputManager.js";
 import { keydown, keyup, mouseclick, MOUSE_CLICKED } from "../controls.js";
 import { BulletFactory } from "../factories/BulletFactory.js";
 import { state } from "../state.js";
@@ -15,11 +16,16 @@ export class Game {
     this.canvasHeight = this.canvas.height;
     this.lastRender = 0;
 
-    this.bulletFactory = new BulletFactory();
+    // characters
     this.hero = new Hero();
+    // bullets
+    this.bulletFactory = new BulletFactory();
     this.bulletsPool = this.bulletFactory.produceBullets();
     this.bulletsDisplayed = [];
+    // managers
+
     this.drawManager = new DrawManager();
+    this.inputManager = new InputManager(this.hero);
   }
 
   init() {
@@ -48,18 +54,10 @@ export class Game {
     this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
     this.drawManager.draw(this.ctx, this.hero, this.bulletsDisplayed);
   }
-  handleInput() {
-    switch (state.input) {
-      case MOUSE_CLICKED:
-        console.log("clicked");
 
-      default:
-        break;
-    }
-  }
   update(progress) {
     //ctx.save();
-    this.handleInput();
+    this.inputManager.handleInput();
     this.hero.update();
     for (let bullet = 0; bullet < this.bulletsDisplayed.length; bullet++) {
       this.bulletsDisplayed[bullet].update();
