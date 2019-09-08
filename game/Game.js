@@ -3,7 +3,7 @@ import { keydown, keyup, mouseclick } from "../controls.js";
 import { BulletFactory } from "../factories/BulletFactory.js";
 
 // testing
-import { NormalBullet } from "../gameItems/Bullet.js";
+
 import { Hero } from "../characters/Hero.js";
 
 export class Game {
@@ -17,7 +17,7 @@ export class Game {
     this.bulletFactory = new BulletFactory();
     this.hero = new Hero();
     this.bulletsPool = this.bulletFactory.produceBullets();
-    this.bulletsBeenShown = [];
+    this.bulletsDisplayed = [];
     this.drawManager = new DrawManager();
   }
 
@@ -45,7 +45,7 @@ export class Game {
 
   gameDraw() {
     this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
-    this.drawManager.draw(this.ctx, this.hero, this.bulletsBeenShown);
+    this.drawManager.draw(this.ctx, this.hero, this.bulletsDisplayed);
   }
 
   update(progress) {

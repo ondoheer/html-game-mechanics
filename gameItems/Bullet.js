@@ -10,7 +10,6 @@ class BulletBase {
 
     this.xVelocity = 0;
     this.yVelocity = 0;
-    this.exists = true;
   }
   setTravelSpeedRight() {
     this.xVelocity = this.speed;

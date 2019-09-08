@@ -1,7 +1,8 @@
 import { NormalBullet } from "../gameItems/Bullet.js";
+import { NUMBER_OF_BULLETS } from "../config/elements.js";
 
 export class BulletFactory {
-  constructor(number = 1000) {
+  constructor(number = NUMBER_OF_BULLETS) {
     this.number = number;
     this.normalBulletTemplate = NormalBullet;
     this.bullets = [];
