@@ -17,6 +17,8 @@ export class CharacterBase {
     this.y = y;
     this.yVelocity = 0;
     this.xVelocity = 0;
+    this.height = size;
+    this.width = size; // this ought to be refactored around to use height and width instead of size
     (this.size = size), (this.color = color), (this.speed = speed);
   }
   draw(ctx) {

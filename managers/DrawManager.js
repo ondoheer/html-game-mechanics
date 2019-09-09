@@ -27,7 +27,7 @@ export class DrawManager {
   }
 
   isElementOutOfBounds(element) {
-    return element.x > this.canvasWidth || element.x < 0;
+    return element.x > this.canvasWidth - element.width || element.x < 0;
   }
 
   disableBullets() {
