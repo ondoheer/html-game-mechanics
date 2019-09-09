@@ -94,7 +94,7 @@ export class Hero extends CharacterBase {
    */
   getShootingPosition() {
     const rightLimit = this.x + this.size;
-    const midSection = this.y - this.size;
+    const midSection = this.y + this.size / 2;
     return { rightLimit, midSection };
   }
   shoot() {
