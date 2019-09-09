@@ -21,8 +21,4 @@ export class CharacterBase {
     this.width = size; // this ought to be refactored around to use height and width instead of size
     (this.size = size), (this.color = color), (this.speed = speed);
   }
-  draw(ctx) {
-    ctx.fillStyle = this.color;
-    ctx.fillRect(this.x, this.y, this.size, this.size);
-  }
 }
