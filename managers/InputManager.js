@@ -8,9 +8,15 @@ import {
   MOUSE_CLICKED
 } from "../controls.js";
 import { state } from "../state.js";
+import { BulletManager } from "../managers/BulletManager.js";
 export class InputManager {
-  constructor(hero) {
+  constructor(bulletManager, hero) {
     this.hero = hero;
+    this.bulletManager = bulletManager;
+  }
+  shoot() {
+    const bulletCoords = this.hero.getShootingPosition();
+    this.bulletManager.enableBullet(bulletCoords.x, bulletCoords.y);
   }
 
   handleInput() {
@@ -35,7 +41,7 @@ export class InputManager {
         // unused now, helps with special stuff done while in the air;
         break;
       case MOUSE_CLICKED:
-        this.hero.shoot();
+        this.shoot();
       default:
         // unused now;
         break;

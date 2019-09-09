@@ -2,15 +2,6 @@ import { CharacterBase } from "./CharacterBase.js";
 import { JUMP_SPEED, JUMP_MAX_HEIGHT } from "../config/character.js";
 import { state } from "../state.js";
 import { canvasWidth, canvasHeight } from "../main.js";
-import {
-  MOVE_LEFT_PRESSED,
-  MOVE_RIGHT_PRESSED,
-  MOVE_LEFT_RELEASED,
-  MOVE_RIGHT_RELEASED,
-  JUMP_PRESSED,
-  JUMP_RELEASED,
-  MOUSE_CLICKED
-} from "../controls.js";
 
 export class Hero extends CharacterBase {
   constructor() {
@@ -93,13 +84,13 @@ export class Hero extends CharacterBase {
    * There the bullets will spawn from.animacionesIt always should be the middle of the character
    */
   getShootingPosition() {
-    const rightLimit = this.x + this.size;
-    const midSection = this.y + this.size / 2;
-    return { rightLimit, midSection };
+    // right limit
+    const x = this.x + this.size;
+    // mid section
+    const y = this.y + this.size / 2;
+    return { x, y };
   }
-  shoot() {
-    console.log(this.getShootingPosition());
-  }
+
   updateCoordSpeeds() {
     this.x += this.xVelocity;
     this.y += this.yVelocity;

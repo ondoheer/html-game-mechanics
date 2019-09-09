@@ -1,21 +1,47 @@
 export class DrawManager {
-  constructor() {}
+  constructor(canvas, bulletManager, hero) {
+    this.canvas = canvas;
+    this.ctx = this.canvas.getContext("2d");
+    this.canvasWidth = this.canvas.width;
+    this.canvasHeight = this.canvas.height;
+    this.bulletManager = bulletManager;
+    this.hero = hero;
+  }
+  clear() {
+    this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+  }
+  drawHero() {
+    this.ctx.fillStyle = this.hero.color;
+    this.ctx.fillRect(this.hero.x, this.hero.y, this.hero.size, this.hero.size);
+  }
+  drawBullet(bullet) {
+    this.ctx.fillStyle = bullet.color;
+    this.ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+  }
+  drawExistingBullets() {
+    const bullets = this.bulletManager.bulletsDisplayed;
 
-  drawHero(ctx, hero) {
-    ctx.fillStyle = hero.color;
-    ctx.fillRect(hero.x, hero.y, hero.size, hero.size);
-  }
-  drawBullet(ctx, bullet) {
-    ctx.fillStyle = bullet.color;
-    ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
-  }
-  drawExistingBullets(ctx, bullets) {
     for (let index = 0; index < bullets.length; index++) {
-      this.drawBullet(ctx, bullets[index]);
+      this.drawBullet(bullets[index]);
     }
   }
-  draw(ctx, hero, bullets) {
-    this.drawHero(ctx, hero);
-    this.drawExistingBullets(ctx, bullets);
+
+  isElementOutOfBounds(element) {
+    return element.x > this.canvasWidth;
+  }
+
+  disableBullets() {
+    // method 1 is checking if they are out of the screen
+    for (let i = 0; i < this.bulletManager.bulletsDisplayed.length; i++) {
+      const bullet = this.bulletManager.bulletsDisplayed[i];
+      if (this.isElementOutOfBounds(bullet)) {
+        this.bulletManager.disableBullet(i);
+      }
+    }
+    // method 2 is checking if they collisioned with something
+  }
+  draw() {
+    this.drawHero();
+    this.drawExistingBullets();
   }
 }

@@ -2,18 +2,15 @@ import { DrawManager } from "../managers/DrawManager.js";
 import { InputManager } from "../managers/InputManager.js";
 import { keydown, keyup, mouseclick, MOUSE_CLICKED } from "../controls.js";
 import { BulletFactory } from "../factories/BulletFactory.js";
-import { state } from "../state.js";
 
 // testing
 
 import { Hero } from "../characters/Hero.js";
+import { BulletManager } from "../managers/BulletManager.js";
 
 export class Game {
   constructor(htmlElement) {
     this.canvas = document.getElementById(htmlElement);
-    this.ctx = this.canvas.getContext("2d");
-    this.canvasWidth = this.canvas.width;
-    this.canvasHeight = this.canvas.height;
     this.lastRender = 0;
 
     // characters
@@ -24,8 +21,16 @@ export class Game {
     this.bulletsDisplayed = [];
     // managers
 
-    this.drawManager = new DrawManager();
-    this.inputManager = new InputManager(this.hero);
+    this.bulletManager = new BulletManager(
+      this.bulletsPool,
+      this.bulletsDisplayed
+    );
+    this.inputManager = new InputManager(this.bulletManager, this.hero);
+    this.drawManager = new DrawManager(
+      this.canvas,
+      this.bulletManager,
+      this.hero
+    );
   }
 
   init() {
@@ -51,14 +56,15 @@ export class Game {
   }
 
   gameDraw() {
-    this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
-    this.drawManager.draw(this.ctx, this.hero, this.bulletsDisplayed);
+    this.drawManager.clear();
+    this.drawManager.draw();
   }
 
   update(progress) {
     //ctx.save();
     this.inputManager.handleInput();
     this.hero.update();
+    // Update all the bullets on screen
     for (let bullet = 0; bullet < this.bulletsDisplayed.length; bullet++) {
       this.bulletsDisplayed[bullet].update();
     }
