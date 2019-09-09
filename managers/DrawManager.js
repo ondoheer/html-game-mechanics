@@ -43,5 +43,6 @@ export class DrawManager {
   draw() {
     this.drawHero();
     this.drawExistingBullets();
+    this.disableBullets();
   }
 }
