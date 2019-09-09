@@ -46,5 +46,6 @@ export class InputManager {
         // unused now;
         break;
     }
+    state.input = undefined;
   }
 }

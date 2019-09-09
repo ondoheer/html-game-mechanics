@@ -115,7 +115,5 @@ export class Hero extends CharacterBase {
 
   update() {
     this.updatePosition();
-    // reset input state
-    state.input = undefined;
   }
 }

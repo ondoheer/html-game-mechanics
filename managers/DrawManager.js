@@ -40,9 +40,16 @@ export class DrawManager {
     }
     // method 2 is checking if they collisioned with something
   }
+  blockHeroMovement() {
+    if (this.isElementOutOfBounds(this.hero)) {
+      this.hero.x = this.hero.x < 0 ? 0 : this.canvasWidth - this.hero.size;
+      this.hero.stopMoving();
+    }
+  }
   draw() {
     this.drawHero();
     this.drawExistingBullets();
     this.disableBullets();
+    this.blockHeroMovement();
   }
 }
