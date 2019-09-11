@@ -1,4 +1,4 @@
-import { NormalBullet } from "../gameItems/Bullet.js";
+import { NormalBullet } from "../entities/gameItems/Bullet.js";
 import { NUMBER_OF_BULLETS } from "../config/elements.js";
 
 export class BulletFactory {

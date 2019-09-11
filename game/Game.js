@@ -1,11 +1,11 @@
 import { DrawManager } from "../managers/DrawManager.js";
 import { InputManager } from "../managers/InputManager.js";
-import { keydown, keyup, mouseclick, MOUSE_CLICKED } from "../controls.js";
+import { keydown, keyup, mouseclick } from "../controls.js";
 import { BulletFactory } from "../factories/BulletFactory.js";
 
 // testing
 
-import { Hero } from "../characters/Hero.js";
+import { Hero } from "../entities/Hero.js";
 import { BulletManager } from "../managers/BulletManager.js";
 
 export class Game {

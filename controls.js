@@ -1,5 +1,5 @@
 import { state } from "./state.js";
-import { NormalBullet } from "./gameItems/Bullet.js";
+
 export const KEY_MAP = {
   KeyD: "MOVE_RIGHT",
   KeyA: "MOVE_LEFT",

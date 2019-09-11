@@ -8,7 +8,7 @@ import {
   MOUSE_CLICKED
 } from "../controls.js";
 import { state } from "../state.js";
-import { BulletManager } from "../managers/BulletManager.js";
+
 export class InputManager {
   constructor(bulletManager, hero) {
     this.hero = hero;
