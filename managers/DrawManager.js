@@ -12,7 +12,12 @@ export class DrawManager {
   }
   drawHero() {
     this.ctx.fillStyle = this.hero.color;
-    this.ctx.fillRect(this.hero.x, this.hero.y, this.hero.size, this.hero.size);
+    this.ctx.fillRect(
+      this.hero.x,
+      this.hero.y,
+      this.hero.width,
+      this.hero.height
+    );
   }
   drawBullet(bullet) {
     this.ctx.fillStyle = bullet.color;

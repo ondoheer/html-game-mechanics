@@ -1,19 +1,22 @@
-import { CharacterBase } from "./CharacterBase.js";
-import { JUMP_SPEED, JUMP_MAX_HEIGHT } from "../config/character.js";
+import { CHARACTER_SIZE } from "../config/entities.js";
+import { Entity } from "./Entity.js";
+import { JUMP_SPEED, JUMP_MAX_HEIGHT } from "../config/entities.js";
 import { state } from "../state.js";
 import { canvasWidth, canvasHeight } from "../main.js";
 
-export class Hero extends CharacterBase {
-  constructor() {
-    super();
+export class Hero extends Entity {
+  constructor(x, y, width, height, color, speed) {
+    super(x, y, width, height, color, speed);
     this.jumpSpeed = JUMP_SPEED;
     this.jumpMaxHeight = JUMP_MAX_HEIGHT;
+    this.height = CHARACTER_SIZE;
+    this.width = CHARACTER_SIZE;
   }
   /**
    * Checks if character has reached the right canvas boundary
    */
   reachedRightBoundary() {
-    return this.x >= canvasWidth - this.size - this.speed;
+    return this.x >= canvasWidth - this.width - this.speed;
   }
   /**
    * Checks if character has reached the left canvas boundary
@@ -35,7 +38,7 @@ export class Hero extends CharacterBase {
    * checks if Y coord is the starting position
    */
   isStandingOnGround() {
-    return canvasHeight - this.size == this.y; // 150 - 50 == 100
+    return canvasHeight - this.height == this.y; // 150 - 50 == 100
   }
   /**
    * Updates the Hero Y position, once it has reached the most he can jump,
@@ -85,9 +88,9 @@ export class Hero extends CharacterBase {
    */
   getShootingPosition() {
     // right limit
-    const x = this.x + this.size;
+    const x = this.x + this.width;
     // mid section
-    const y = this.y + this.size / 2;
+    const y = this.y + this.height / 2;
     return { x, y };
   }
 

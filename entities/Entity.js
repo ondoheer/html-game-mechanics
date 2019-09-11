@@ -1,13 +1,5 @@
 export class Entity {
-  constructor(
-    x = 0,
-    y = 100,
-    width,
-    height,
-    size = CHARACTER_SIZE,
-    color = "brown",
-    speed = 5
-  ) {
+  constructor(x, y, width, height, color, speed) {
     this._state = {
       isJumping: false,
       isFalling: false
