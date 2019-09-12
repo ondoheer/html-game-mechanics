@@ -51,6 +51,7 @@ export class DrawManager {
       this.hero.stopMoving();
     }
   }
+
   draw() {
     this.drawHero();
     this.drawExistingBullets();
