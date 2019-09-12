@@ -1,5 +1,7 @@
+import { LEFT, RIGHT } from "../config/entities.js";
+
 export class Entity {
-  constructor(x, y, width, height, color, speed) {
+  constructor(x, y, width, height, color, speed, direction) {
     this._state = {
       isJumping: false,
       isFalling: false
@@ -12,7 +14,25 @@ export class Entity {
     this.width = width; // this ought to be refactored around to use height and width instead of size
     this.color = color;
     this.speed = speed;
+    this.direction = direction;
   }
 
-  update() {}
+  // For diagonals this should be a state machine?
+  setTravelSpeed() {
+    if (this.direction === LEFT) {
+      this.xVelocity = -this.speed;
+    } else if (this.direction === RIGHT) {
+      this.xVelocity = this.speed;
+    }
+  }
+
+  travel() {
+    this.x += this.xVelocity;
+    this.y += this.yVelocity;
+  }
+
+  update() {
+    this.setTravelSpeed();
+    this.travel();
+  }
 }
