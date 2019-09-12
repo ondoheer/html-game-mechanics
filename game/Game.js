@@ -6,7 +6,7 @@ import { NormalBullet } from "../entities/gameItems/Bullet.js";
 import { NUMBER_OF_BULLETS } from "../config/elements.js";
 import { LargeSquareFactory } from "../factories/LargeSquareFactory.js";
 import { LargeSquare } from "../entities/enemies/LargeSquare.js";
-import { EntitiesManager } from "../managers/EntitiesManager.js";
+import { EntitiesOrchestrator } from "../managers/EntitiesOrchestrator.js";
 
 // testing
 
@@ -18,6 +18,8 @@ export class Game {
     this.canvas = document.getElementById(htmlElement);
     this.lastRender = 0;
     //This object will contain all drawable entities
+    // maybe for code cleanness it could move to another file
+    // like game setup
     this.entities = {
       hero: new Hero(0, 100, 50, 50, "brown", 5), // this should be in a hero factory
       enemies: {
@@ -52,7 +54,7 @@ export class Game {
     this.drawManager = new DrawManager(
       this.canvas,
       this.bulletManager,
-      this.entities.hero
+      this.entities
     );
   }
 

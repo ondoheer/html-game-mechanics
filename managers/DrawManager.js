@@ -1,11 +1,11 @@
 export class DrawManager {
-  constructor(canvas, bulletManager, hero) {
+  constructor(canvas, bulletManager, entities) {
     this.canvas = canvas;
     this.ctx = this.canvas.getContext("2d");
     this.canvasWidth = this.canvas.width;
     this.canvasHeight = this.canvas.height;
     this.bulletManager = bulletManager;
-    this.hero = hero;
+    this.hero = entities.hero;
   }
   clear() {
     this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
