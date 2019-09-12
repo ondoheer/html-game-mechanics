@@ -8,10 +8,9 @@ import { LargeSquareFactory } from "../factories/LargeSquareFactory.js";
 import { LargeSquare } from "../entities/enemies/LargeSquare.js";
 import { EntitiesOrchestrator } from "../managers/EntitiesOrchestrator.js";
 
-// testing
-
 import { Hero } from "../entities/Hero.js";
 import { BulletManager } from "../managers/BulletManager.js";
+import { EnemiesManager } from "../managers/EnemiesManager.js";
 
 export class Game {
   constructor(htmlElement) {
@@ -47,6 +46,11 @@ export class Game {
       this.entities.bullets.bulletsPool,
       this.entities.bullets.bulletsDisplayed
     );
+    // this is only working for large squares needs to be refactored
+    this.enemiesManager = new EnemiesManager(
+      this.entities.enemies.largeSquares.largeSquarePool,
+      this.entities.enemies.enemiesDisplayed
+    );
     this.inputManager = new InputManager(
       this.bulletManager,
       this.entities.hero
@@ -54,6 +58,7 @@ export class Game {
     this.drawManager = new DrawManager(
       this.canvas,
       this.bulletManager,
+      this.enemiesManager,
       this.entities
     );
   }
@@ -64,8 +69,10 @@ export class Game {
     window.addEventListener("keyup", keyup, false);
     window.addEventListener("click", mouseclick, false);
 
-    // canvas drawing and updating
+    // Create enemies
+    this.enemiesManager.enableEntity(120, 70);
 
+    // canvas drawing and updating
     this.gameDraw();
     window.requestAnimationFrame(this.loop.bind(this));
   }

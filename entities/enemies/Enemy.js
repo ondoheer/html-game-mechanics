@@ -6,4 +6,8 @@ export class Enemy extends Entity {
     super(x, y, width, height, color, speed, direction);
     this.hits = hits;
   }
+
+  isDead() {
+    return this.hits <= 0;
+  }
 }

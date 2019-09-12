@@ -1,10 +1,11 @@
 export class DrawManager {
-  constructor(canvas, bulletManager, entities) {
+  constructor(canvas, bulletManager, enemiesManager, entities) {
     this.canvas = canvas;
     this.ctx = this.canvas.getContext("2d");
     this.canvasWidth = this.canvas.width;
     this.canvasHeight = this.canvas.height;
     this.bulletManager = bulletManager;
+    this.enemiesManager = enemiesManager;
     this.hero = entities.hero;
   }
   clear() {
@@ -30,6 +31,17 @@ export class DrawManager {
       this.drawBullet(bullets[index]);
     }
   }
+  drawExistingEnemies() {
+    const enemies = this.enemiesManager.entitiesDisplayed;
+    for (let index = 0; index < enemies.length; index++) {
+      this.drawBullet(enemies[index]);
+    }
+  }
+  drawExistingEntities() {
+    this.drawExistingBullets();
+    this.drawExistingEnemies();
+    this.drawHero();
+  }
 
   isElementOutOfBounds(element) {
     return element.x > this.canvasWidth - element.width || element.x < 0;
@@ -45,6 +57,20 @@ export class DrawManager {
     }
     // method 2 is checking if they collisioned with something
   }
+  disableEnemies() {
+    for (let i = 0; i < this.enemiesManager.entitiesDisplayed.length; i++) {
+      const enemy = this.enemiesManager.entitiesDisplayed[i];
+      if (enemy.isDead()) {
+        this.enemiesManager.disableEntity(i);
+        // Será este el mejor sitio para ejecutar esto?
+        enemy.destroy();
+      }
+    }
+  }
+  disableEntities() {
+    this.disableBullets();
+    this.disableEnemies();
+  }
   blockHeroMovement() {
     if (this.isElementOutOfBounds(this.hero)) {
       this.hero.x = this.hero.x < 0 ? 0 : this.canvasWidth - this.hero.width;
@@ -53,9 +79,8 @@ export class DrawManager {
   }
 
   draw() {
-    this.drawHero();
-    this.drawExistingBullets();
-    this.disableBullets();
+    this.drawExistingEntities();
+    this.disableEntities();
     this.blockHeroMovement();
   }
 }
