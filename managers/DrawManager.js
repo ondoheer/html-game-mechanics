@@ -11,36 +11,24 @@ export class DrawManager {
   clear() {
     this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
   }
-  drawHero() {
-    this.ctx.fillStyle = this.hero.color;
-    this.ctx.fillRect(
-      this.hero.x,
-      this.hero.y,
-      this.hero.width,
-      this.hero.height
-    );
-  }
-  drawBullet(bullet) {
-    this.ctx.fillStyle = bullet.color;
-    this.ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
-  }
+
   drawExistingBullets() {
     const bullets = this.bulletManager.entitiesDisplayed;
 
     for (let index = 0; index < bullets.length; index++) {
-      this.drawBullet(bullets[index]);
+      bullets[index].draw(this.ctx);
     }
   }
   drawExistingEnemies() {
     const enemies = this.enemiesManager.entitiesDisplayed;
     for (let index = 0; index < enemies.length; index++) {
-      this.drawBullet(enemies[index]);
+      enemies[index].draw(this.ctx);
     }
   }
   drawExistingEntities() {
     this.drawExistingBullets();
     this.drawExistingEnemies();
-    this.drawHero();
+    this.hero.draw(this.ctx);
   }
 
   isElementOutOfBounds(element) {

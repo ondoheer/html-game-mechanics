@@ -73,7 +73,7 @@ export class Game {
 
     // Create enemies
     this.enemiesManager.enableEntity(120, 70);
-    console.log(this.entities);
+   
 
     // canvas drawing and updating
     this.gameDraw();
