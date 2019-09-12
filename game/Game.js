@@ -2,6 +2,8 @@ import { DrawManager } from "../managers/DrawManager.js";
 import { InputManager } from "../managers/InputManager.js";
 import { keydown, keyup, mouseclick } from "../controls.js";
 import { BulletFactory } from "../factories/BulletFactory.js";
+import { NormalBullet } from "../entities/gameItems/Bullet.js";
+import { NUMBER_OF_BULLETS } from "../config/elements.js";
 
 // testing
 
@@ -17,8 +19,8 @@ export class Game {
     this.hero = new Hero(0, 100, 50, 50, "brown", 5);
 
     // bullets
-    this.bulletFactory = new BulletFactory();
-    this.bulletsPool = this.bulletFactory.produceBullets();
+    this.bulletFactory = new BulletFactory(NUMBER_OF_BULLETS, NormalBullet);
+    this.bulletsPool = this.bulletFactory.produceEntities();
     this.bulletsDisplayed = [];
     // managers
 
