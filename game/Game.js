@@ -6,6 +6,7 @@ import { NormalBullet } from "../entities/gameItems/Bullet.js";
 import { NUMBER_OF_BULLETS } from "../config/elements.js";
 import { LargeSquareFactory } from "../factories/LargeSquareFactory.js";
 import { LargeSquare } from "../entities/enemies/LargeSquare.js";
+import { EntitiesManager } from "../managers/EntitiesManager.js";
 
 // testing
 
@@ -16,31 +17,42 @@ export class Game {
   constructor(htmlElement) {
     this.canvas = document.getElementById(htmlElement);
     this.lastRender = 0;
+    //This object will contain all drawable entities
+    this.entities = {
+      hero: new Hero(0, 100, 50, 50, "brown", 5), // this should be in a hero factory
+      enemies: {
+        largeSquares: {
+          largeSquarePool: new LargeSquareFactory(
+            10,
+            LargeSquare
+          ).produceEntities()
+        },
 
-    // characters
-    this.hero = new Hero(0, 100, 50, 50, "brown", 5);
-
-    // bullets
-    this.bulletFactory = new BulletFactory(NUMBER_OF_BULLETS, NormalBullet);
-    this.bulletsPool = this.bulletFactory.produceEntities();
-    this.bulletsDisplayed = [];
-
-    // Enemies
-    this.largeSquareFactory = new LargeSquareFactory(10, LargeSquare);
-    this.largeSquarePool = this.largeSquareFactory.produceEntities();
-    this.largeSquareDisplayed = [];
+        enemiesDisplayed: []
+      },
+      bullets: {
+        bulletsPool: new BulletFactory(
+          NUMBER_OF_BULLETS,
+          NormalBullet
+        ).produceEntities(),
+        bulletsDisplayed: []
+      }
+    };
 
     // managers
 
     this.bulletManager = new BulletManager(
-      this.bulletsPool,
-      this.bulletsDisplayed
+      this.entities.bullets.bulletsPool,
+      this.entities.bullets.bulletsDisplayed
     );
-    this.inputManager = new InputManager(this.bulletManager, this.hero);
+    this.inputManager = new InputManager(
+      this.bulletManager,
+      this.entities.hero
+    );
     this.drawManager = new DrawManager(
       this.canvas,
       this.bulletManager,
-      this.hero
+      this.entities.hero
     );
   }
 
@@ -74,10 +86,14 @@ export class Game {
   update(progress) {
     //ctx.save();
     this.inputManager.handleInput();
-    this.hero.update();
+    this.entities.hero.update();
     // Update all the bullets on screen
-    for (let bullet = 0; bullet < this.bulletsDisplayed.length; bullet++) {
-      this.bulletsDisplayed[bullet].update();
+    for (
+      let bullet = 0;
+      bullet < this.entities.bullets.bulletsDisplayed.length;
+      bullet++
+    ) {
+      this.entities.bullets.bulletsDisplayed[bullet].update();
     }
 
     //ctx.restore();
