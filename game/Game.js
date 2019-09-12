@@ -15,7 +15,7 @@ export class Game {
 
     // characters
     this.hero = new Hero(0, 100, 50, 50, "brown", 5);
-    console.log(this.hero);
+
     // bullets
     this.bulletFactory = new BulletFactory();
     this.bulletsPool = this.bulletFactory.produceBullets();

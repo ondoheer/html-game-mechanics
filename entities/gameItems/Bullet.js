@@ -1,43 +1,28 @@
-class BulletBase {
-  constructor(x, y, width = 15, height = 3, speed = 15, color = "#fafafa") {
-    this.speed = speed;
-    this.iteration = 0;
-    this.x = x;
-    this.y = y;
-    this.color = color;
-    this.width = width;
-    this.height = height;
+import { Entity } from "../Entity.js";
 
-    this.xVelocity = 0;
-    this.yVelocity = 0;
+export class NormalBullet extends Entity {
+  constructor(x, y) {
+    super(x, y);
+    this.width = 10;
+    this.height = 3;
+    this.color = "#fafafa";
+    this.speed = 15;
   }
+
   setTravelSpeedRight() {
     this.xVelocity = this.speed;
   }
-  setTravelSpeedLEft() {
+  setTravelSpeedLeft() {
     this.yVelocity -= this.speed;
   }
   travel() {
     this.x += this.xVelocity;
     this.y += this.yVelocity;
   }
-  disable() {
-    this.exists = false;
-  }
-  update() {
-    /** va a requerir más funciones como updetear si debería seguir en pantalla */
-    if (this.iteration > 0 && this.iteration < 2) {
-      this.setTravelSpeedRight();
-    }
-    this.iteration++;
-    this.travel();
-    //this.disable();
-  }
-}
 
-export class NormalBullet extends BulletBase {
-  constructor(x, y) {
-    super(x, y);
-    this.width = 10;
+  update() {
+    this.setTravelSpeedRight();
+
+    this.travel();
   }
 }
