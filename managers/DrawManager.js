@@ -47,7 +47,7 @@ export class DrawManager {
   }
   blockHeroMovement() {
     if (this.isElementOutOfBounds(this.hero)) {
-      this.hero.x = this.hero.x < 0 ? 0 : this.canvasWidth - this.hero.size;
+      this.hero.x = this.hero.x < 0 ? 0 : this.canvasWidth - this.hero.width;
       this.hero.stopMoving();
     }
   }
