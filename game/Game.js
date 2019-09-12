@@ -11,6 +11,7 @@ import { EntitiesOrchestrator } from "../managers/EntitiesOrchestrator.js";
 import { Hero } from "../entities/Hero.js";
 import { BulletManager } from "../managers/BulletManager.js";
 import { EnemiesManager } from "../managers/EnemiesManager.js";
+import { CollisionManager } from "../managers/CollisionManager.js";
 
 export class Game {
   constructor(htmlElement) {
@@ -61,6 +62,7 @@ export class Game {
       this.enemiesManager,
       this.entities
     );
+    this.collisionManager = new CollisionManager(this.entities);
   }
 
   init() {
@@ -103,6 +105,9 @@ export class Game {
       bullet++
     ) {
       this.entities.bullets.bulletsDisplayed[bullet].update();
+      this.collisionManager.bulletCollision(
+        this.entities.bullets.bulletsDisplayed[bullet]
+      );
     }
 
     //ctx.restore();
