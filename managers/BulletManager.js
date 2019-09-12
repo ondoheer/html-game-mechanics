@@ -1,16 +1,7 @@
-export class BulletManager {
-  constructor(bulletsPool, bulletsDisplayed) {
-    this.bulletsPool = bulletsPool;
-    this.bulletsDisplayed = bulletsDisplayed;
-  }
+import { PoolOfEntitiesManager } from "./PoolOfEntitiesManager.js";
 
-  enableBullet(x, y) {
-    let bullet = this.bulletsPool.pop();
-    bullet.x = x;
-    bullet.y = y;
-    this.bulletsDisplayed.push(bullet);
-  }
-  disableBullet(bulletIndex) {
-    this.bulletsPool.push(this.bulletsDisplayed.splice(bulletIndex, 1)[0]);
+export class BulletManager extends PoolOfEntitiesManager {
+  constructor(entitiesPool, entitiesDisplayed) {
+    super(entitiesPool, entitiesDisplayed);
   }
 }

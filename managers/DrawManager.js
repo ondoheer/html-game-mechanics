@@ -24,7 +24,7 @@ export class DrawManager {
     this.ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
   }
   drawExistingBullets() {
-    const bullets = this.bulletManager.bulletsDisplayed;
+    const bullets = this.bulletManager.entitiesDisplayed;
 
     for (let index = 0; index < bullets.length; index++) {
       this.drawBullet(bullets[index]);
@@ -37,10 +37,10 @@ export class DrawManager {
 
   disableBullets() {
     // method 1 is checking if they are out of the screen
-    for (let i = 0; i < this.bulletManager.bulletsDisplayed.length; i++) {
-      const bullet = this.bulletManager.bulletsDisplayed[i];
+    for (let i = 0; i < this.bulletManager.entitiesDisplayed.length; i++) {
+      const bullet = this.bulletManager.entitiesDisplayed[i];
       if (this.isElementOutOfBounds(bullet)) {
-        this.bulletManager.disableBullet(i);
+        this.bulletManager.disableEntity(i);
       }
     }
     // method 2 is checking if they collisioned with something

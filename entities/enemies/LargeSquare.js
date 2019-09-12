@@ -1,6 +1,6 @@
-import { Entity } from "../Entity;";
+import { Entity } from "../Entity.js";
 
-class LargeSquare extends Entity {
+export class LargeSquare extends Entity {
   constructor(x, y, width, height, color, speed) {
     super(x, y, width, height, color, speed);
     this.hits = 5;

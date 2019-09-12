@@ -4,6 +4,8 @@ import { keydown, keyup, mouseclick } from "../controls.js";
 import { BulletFactory } from "../factories/BulletFactory.js";
 import { NormalBullet } from "../entities/gameItems/Bullet.js";
 import { NUMBER_OF_BULLETS } from "../config/elements.js";
+import { LargeSquareFactory } from "../factories/LargeSquareFactory.js";
+import { LargeSquare } from "../entities/enemies/LargeSquare.js";
 
 // testing
 
@@ -22,6 +24,12 @@ export class Game {
     this.bulletFactory = new BulletFactory(NUMBER_OF_BULLETS, NormalBullet);
     this.bulletsPool = this.bulletFactory.produceEntities();
     this.bulletsDisplayed = [];
+
+    // Enemies
+    this.largeSquareFactory = new LargeSquareFactory(10, LargeSquare);
+    this.largeSquarePool = this.largeSquareFactory.produceEntities();
+    this.largeSquareDisplayed = [];
+
     // managers
 
     this.bulletManager = new BulletManager(

@@ -16,7 +16,7 @@ export class InputManager {
   }
   shoot() {
     const bulletCoords = this.hero.getShootingPosition();
-    this.bulletManager.enableBullet(bulletCoords.x, bulletCoords.y);
+    this.bulletManager.enableEntity(bulletCoords.x, bulletCoords.y);
   }
 
   handleInput() {
