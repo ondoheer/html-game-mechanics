@@ -17,8 +17,7 @@ export class Entity {
     this.direction = direction;
   }
   getArea() {
-    console.log(this);
-    area = {
+    const area = {
       x1: this.x,
       x2: this.x + this.width,
       y1: this.y,
