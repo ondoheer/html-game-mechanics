@@ -1,10 +1,10 @@
 import { Entity } from "../Entity.js";
-import { LEFT } from "../../config/entities.js";
+import { LEFT_DIRECTION } from "../../config/entities.js";
 export class LargeSquare extends Entity {
   constructor(x, y, width, height, color, speed) {
     super(x, y, width, height, color, speed);
     this.hits = 5;
-    this.direction = LEFT;
+    this.direction = LEFT_DIRECTION;
   }
 
   getHit(dmg = 1) {

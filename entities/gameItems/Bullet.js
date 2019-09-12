@@ -1,5 +1,5 @@
 import { Entity } from "../Entity.js";
-import { RIGHT } from "../../config/entities.js";
+import { RIGHT_DIRECTION } from "../../config/entities.js";
 export class NormalBullet extends Entity {
   constructor(x, y) {
     super(x, y);
@@ -7,6 +7,6 @@ export class NormalBullet extends Entity {
     this.height = 3;
     this.color = "#fafafa";
     this.speed = 15;
-    this.direction = RIGHT;
+    this.direction = RIGHT_DIRECTION;
   }
 }

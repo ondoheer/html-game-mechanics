@@ -1,4 +1,4 @@
-import { LEFT, RIGHT } from "../config/entities.js";
+import { LEFT_DIRECTION, RIGHT_DIRECTION } from "../config/entities.js";
 
 export class Entity {
   constructor(x, y, width, height, color, speed, direction) {
@@ -19,9 +19,9 @@ export class Entity {
 
   // For diagonals this should be a state machine?
   setTravelSpeed() {
-    if (this.direction === LEFT) {
+    if (this.direction === LEFT_DIRECTION) {
       this.xVelocity = -this.speed;
-    } else if (this.direction === RIGHT) {
+    } else if (this.direction === RIGHT_DIRECTION) {
       this.xVelocity = this.speed;
     }
   }
