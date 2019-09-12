@@ -3,7 +3,7 @@ import { Entity } from "./Entity.js";
 import { JUMP_SPEED, JUMP_MAX_HEIGHT } from "../config/entities.js";
 import { state } from "../state.js";
 import { canvasWidth, canvasHeight } from "../main.js";
-
+import { LEFT_DIRECTION, RIGHT_DIRECTION } from "../config/entities.js";
 export class Hero extends Entity {
   constructor(x, y, width, height, color, speed) {
     super(x, y, width, height, color, speed);
@@ -67,18 +67,12 @@ export class Hero extends Entity {
     this._state.isFalling = false;
   }
   moveRight() {
-    if (!this.reachedRightBoundary()) {
-      this.xVelocity = this.speed;
-    } else {
-      this.stopMoving();
-    }
+    this.direction = RIGHT_DIRECTION;
+    this.setTravelSpeed();
   }
   moveLeft() {
-    if (!this.reachedLeftBoundary()) {
-      this.xVelocity = -this.speed;
-    } else {
-      this.stopMoving();
-    }
+    this.direction = LEFT_DIRECTION;
+    this.setTravelSpeed();
   }
   stopMoving() {
     this.xVelocity = 0;
