@@ -39,6 +39,22 @@ export class Entity {
     this.y += this.yVelocity;
   }
 
+  isColliding(entity) {
+    const _thisArea = this.getArea();
+    const entityArea = entity.getArea();
+    if (
+      _thisArea.x1 > entityArea.x1 &&
+      _thisArea.x1 < entityArea.x2 &&
+      _thisArea.x2 > entityArea.x1 &&
+      _thisArea.x2 > entityArea.x1 &&
+      _thisArea.y1 > entityArea.y1 &&
+      _thisArea.y1 < entityArea.y2 &&
+      _thisArea.y2 > entityArea.y1 &&
+      _thisArea.y2 < entityArea.y2
+    ) {
+      console.log("went through");
+    }
+  }
   update() {
     this.setTravelSpeed();
     this.travel();
