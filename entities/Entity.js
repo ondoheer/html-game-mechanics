@@ -27,10 +27,15 @@ export class Entity {
   }
   // For diagonals this should be a state machine?
   setTravelSpeed() {
-    if (this.direction === LEFT_DIRECTION) {
-      this.xVelocity = -this.speed;
-    } else if (this.direction === RIGHT_DIRECTION) {
-      this.xVelocity = this.speed;
+    switch (this.direction) {
+      case LEFT_DIRECTION:
+        this.xVelocity = -this.speed;
+        break;
+      case RIGHT_DIRECTION:
+        this.xVelocity = this.speed;
+        break;
+      default:
+        break;
     }
   }
 
