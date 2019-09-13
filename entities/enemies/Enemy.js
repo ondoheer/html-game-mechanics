@@ -16,4 +16,6 @@ export class Enemy extends Entity {
     // Deberían ir dentro de draw
     this.hitAnimationTicking += 1;
   }
+
+  // CollisionManager should be here
 }
