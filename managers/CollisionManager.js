@@ -14,8 +14,12 @@ export class CollisionManager {
     if (
       entity1Area.x1 > entity2Area.x1 &&
       entity1Area.x1 < entity2Area.x2 &&
+      entity1Area.x2 > entity2Area.x1 &&
+      entity1Area.x2 > entity2Area.x1 &&
       entity1Area.y1 > entity2Area.y1 &&
-      entity1Area.y1 < entity2Area.y2
+      entity1Area.y1 < entity2Area.y2 &&
+      entity1Area.y2 > entity2Area.y1 &&
+      entity1Area.y2 < entity2Area.y2
     ) {
       console.log("went through");
     }
