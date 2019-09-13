@@ -8,9 +8,11 @@ export class PoolOfEntitiesManager {
     let entity = this.entitiesPool.pop();
     entity.x = x;
     entity.y = y;
+    entity._state.exists = true;
     this.entitiesDisplayed.push(entity);
   }
   disableEntity(entityIndex) {
-    this.entitiesPool.push(this.entitiesDisplayed.splice(entityIndex, 1)[0]);
+    let entity = this.entitiesDisplayed.splice(entityIndex, 1)[0];
+    this.entitiesPool.push(entity);
   }
 }

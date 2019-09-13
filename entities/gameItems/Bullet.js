@@ -8,5 +8,6 @@ export class NormalBullet extends Entity {
     this.color = "#fafafa";
     this.speed = 15;
     this.direction = RIGHT_DIRECTION;
+    this.dmg = 1;
   }
 }

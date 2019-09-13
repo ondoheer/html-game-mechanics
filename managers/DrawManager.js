@@ -39,7 +39,7 @@ export class DrawManager {
     // method 1 is checking if they are out of the screen
     for (let i = 0; i < this.bulletManager.entitiesDisplayed.length; i++) {
       const bullet = this.bulletManager.entitiesDisplayed[i];
-      if (this.isElementOutOfBounds(bullet)) {
+      if (this.isElementOutOfBounds(bullet) || !bullet._state.exists) {
         this.bulletManager.disableEntity(i);
       }
     }

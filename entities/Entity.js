@@ -4,7 +4,8 @@ export class Entity {
   constructor(x, y, width, height, color, speed, direction) {
     this._state = {
       isJumping: false,
-      isFalling: false
+      isFalling: false,
+      exists: false
     };
     this.x = x;
     this.y = y;
@@ -16,6 +17,13 @@ export class Entity {
     this.speed = speed;
     this.direction = direction;
   }
+  exists() {
+    return this._state.exists;
+  }
+  recall() {
+    this._state.exists = false;
+  }
+
   /**
    * Returns the 4 points defining an entity area
    */
@@ -68,7 +76,7 @@ export class Entity {
       _thisArea.y2 > entityArea.y1 &&
       _thisArea.y2 < entityArea.y2
     ) {
-      console.log("went through");
+      //console.log("went through");
       return true;
     }
     return false;
