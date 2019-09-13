@@ -13,6 +13,7 @@ export class Enemy extends Entity {
   }
 
   hitAnimation() {
+    // Deberían ir dentro de draw
     this.hitAnimationTicking += 1;
   }
 }
