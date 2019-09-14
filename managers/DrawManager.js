@@ -11,7 +11,13 @@ export class DrawManager {
   clear() {
     this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
   }
-
+  /**
+   * Draws a game over text
+   */
+  gameOver() {
+    this.ctx.font = "50px serif";
+    this.ctx.fillText("Game Over", 300, 90);
+  }
   drawExistingBullets() {
     const bullets = this.bulletManager.entitiesDisplayed;
 

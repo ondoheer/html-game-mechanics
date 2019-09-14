@@ -68,6 +68,7 @@ export class Game {
   }
 
   gameOver() {
+    this.drawManager.gameOver();
     console.log("GAMEOVER");
   }
   init() {
@@ -90,8 +91,14 @@ export class Game {
     this.gameDraw();
 
     this.lastRender = timestamp;
-
-    window.requestAnimationFrame(this.loop.bind(this));
+    const requestId = window.requestAnimationFrame(this.loop.bind(this));
+    /**
+     * Stops the game if it has ended
+     */
+    if (this.state.gameOver) {
+      this.gameOver();
+      window.cancelAnimationFrame(requestId);
+    }
   }
 
   gameDraw() {
@@ -118,9 +125,6 @@ export class Game {
     // check if hero has collided
     this.collisionManager.heroCollision();
     // check if game is over
-    if (this.state.gameOver) {
-      this.gameOver();
-    }
 
     //ctx.restore();
   }
