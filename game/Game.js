@@ -7,7 +7,7 @@ import { NormalBullet } from "../entities/gameItems/Bullet.js";
 import { NUMBER_OF_BULLETS } from "../config/elements.js";
 import { LargeSquareFactory } from "../factories/LargeSquareFactory.js";
 import { LargeSquare } from "../entities/enemies/LargeSquare.js";
-import { EntitiesOrchestrator } from "../managers/EntitiesOrchestrator.js";
+import { EnemiesOrchestrator } from "../managers/EnemiesOrchestrator.js";
 
 import { Hero } from "../entities/Hero.js";
 import { BulletManager } from "../managers/BulletManager.js";
@@ -43,8 +43,11 @@ export class Game {
       }
     };
 
-    // managers
+    /**
+     * managers and Orchestrators
+     */
 
+    // Bullets
     this.bulletManager = new BulletManager(
       this.entities.bullets.bulletsPool,
       this.entities.bullets.bulletsDisplayed
@@ -54,17 +57,22 @@ export class Game {
       this.entities.enemies.largeSquares.largeSquarePool,
       this.entities.enemies.enemiesDisplayed
     );
+    // Input
     this.inputManager = new InputManager(
       this.bulletManager,
       this.entities.hero
     );
+    // Drawing
     this.drawManager = new DrawManager(
       this.canvas,
       this.bulletManager,
       this.enemiesManager,
       this.entities
     );
+    // Collisions
     this.collisionManager = new CollisionManager(this.entities);
+    // Enemies orchestrator
+    this.enemiesOrchestrator = new EnemiesOrchestrator(this.entities);
   }
 
   gameOver() {
@@ -124,7 +132,8 @@ export class Game {
     }
     // check if hero has collided
     this.collisionManager.heroCollision();
-    // check if game is over
+    // Orchestrate enemies appearance
+    this.enemiesOrchestrator.orchestrate();
 
     //ctx.restore();
   }

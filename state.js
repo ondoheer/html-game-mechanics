@@ -3,5 +3,7 @@
  */
 export var state = {
   input: undefined,
-  gameOver: false
+  gameOver: false,
+  currentLevel: 1,
+  finishedGame: false
 };
