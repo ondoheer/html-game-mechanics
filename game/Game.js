@@ -1,5 +1,6 @@
 import { DrawManager } from "../managers/DrawManager.js";
 import { InputManager } from "../managers/InputManager.js";
+import { state } from "../state.js";
 import { keydown, keyup, mouseclick } from "../controls.js";
 import { BulletFactory } from "../factories/BulletFactory.js";
 import { NormalBullet } from "../entities/gameItems/Bullet.js";
@@ -15,6 +16,7 @@ import { CollisionManager } from "../managers/CollisionManager.js";
 
 export class Game {
   constructor(htmlElement) {
+    this.state = state;
     this.canvas = document.getElementById(htmlElement);
     this.lastRender = 0;
     //This object will contain all drawable entities
@@ -65,6 +67,9 @@ export class Game {
     this.collisionManager = new CollisionManager(this.entities);
   }
 
+  gameOver() {
+    console.log("GAMEOVER");
+  }
   init() {
     // controls
     window.addEventListener("keydown", keydown, false);
@@ -73,7 +78,6 @@ export class Game {
 
     // Create enemies
     this.enemiesManager.enableEntity(120, 70);
-   
 
     // canvas drawing and updating
     this.gameDraw();
@@ -110,6 +114,12 @@ export class Game {
       this.collisionManager.bulletCollision(
         this.entities.bullets.bulletsDisplayed[bullet]
       );
+    }
+    // check if hero has collided
+    this.collisionManager.heroCollision();
+    // check if game is over
+    if (this.state.gameOver) {
+      this.gameOver();
     }
 
     //ctx.restore();

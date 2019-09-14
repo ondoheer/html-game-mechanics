@@ -8,16 +8,13 @@ export class Enemy extends Entity {
     this.hitAnimationTicking = 0;
   }
   getHit(dmg = 1) {
-    console.log(this.hits);
     this.hitAnimation();
     this.hits -= dmg;
     if (this.isDead()) {
       this.destroy();
     }
   }
-  destroy() {
-    console.log("I have been destroyed");
-  }
+
   isDead() {
     return this.hits <= 0;
   }

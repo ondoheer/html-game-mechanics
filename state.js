@@ -1,3 +1,7 @@
+/**
+ * Global game state
+ */
 export var state = {
-  input: undefined
+  input: undefined,
+  gameOver: false
 };

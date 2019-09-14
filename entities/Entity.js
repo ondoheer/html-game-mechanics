@@ -17,13 +17,25 @@ export class Entity {
     this.speed = speed;
     this.direction = direction;
   }
+  /**
+   * changes the state to true so it can be shown in the canvas
+   */
   exists() {
     return this._state.exists;
   }
+  /**
+   * changes the state so it can be collected by the manager and disappears from the canvas
+   */
   recall() {
     this._state.exists = false;
   }
-
+  /**
+   * calls recall and triggers any kind of animation
+   */
+  destroy() {
+    this.recall();
+    console.log(`I ${this.constructor.name} have been destroyed`);
+  }
   /**
    * Returns the 4 points defining an entity area
    */
@@ -66,15 +78,16 @@ export class Entity {
   isColliding(entity) {
     const _thisArea = this.getArea();
     const entityArea = entity.getArea();
+
+    /**
+     * https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+     * check for collision detection optimization
+     */
     if (
-      _thisArea.x1 > entityArea.x1 &&
       _thisArea.x1 < entityArea.x2 &&
       _thisArea.x2 > entityArea.x1 &&
-      _thisArea.x2 > entityArea.x1 &&
-      _thisArea.y1 > entityArea.y1 &&
       _thisArea.y1 < entityArea.y2 &&
-      _thisArea.y2 > entityArea.y1 &&
-      _thisArea.y2 < entityArea.y2
+      _thisArea.y2 > entityArea.y1
     ) {
       //console.log("went through");
       return true;
