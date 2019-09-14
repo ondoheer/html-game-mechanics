@@ -9,6 +9,10 @@ export const LEVEL_STRUCTURE = {
       {
         type: LargeSquare,
         number: 3
+      },
+      {
+        type: LargeSquare,
+        number: 5
       }
     ]
   },

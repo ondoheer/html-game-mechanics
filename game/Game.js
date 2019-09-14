@@ -72,7 +72,10 @@ export class Game {
     // Collisions
     this.collisionManager = new CollisionManager(this.entities);
     // Enemies orchestrator
-    this.enemiesOrchestrator = new EnemiesOrchestrator(this.entities);
+    this.enemiesOrchestrator = new EnemiesOrchestrator(
+      this.entities,
+      this.enemiesManager
+    );
   }
 
   gameOver() {
@@ -86,7 +89,7 @@ export class Game {
     window.addEventListener("click", mouseclick, false);
 
     // Create enemies
-    this.enemiesManager.enableEntity(120, 70);
+    //this.enemiesManager.enableEntity(120, 70);
 
     // canvas drawing and updating
     this.gameDraw();
