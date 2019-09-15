@@ -91,7 +91,7 @@ export class Entity {
       _thisArea.y1 < entityArea.y2 &&
       _thisArea.y2 > entityArea.y1
     ) {
-      //console.log("went through");
+      console.log("went through");
       return true;
     }
     return false;

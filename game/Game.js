@@ -5,14 +5,16 @@ import { keydown, keyup, mouseclick } from "../controls.js";
 import { BulletFactory } from "../factories/BulletFactory.js";
 import { NormalBullet } from "../entities/gameItems/Bullet.js";
 import { NUMBER_OF_BULLETS } from "../config/elements.js";
-import { LargeSquareFactory } from "../factories/LargeSquareFactory.js";
+import { EntityFactory } from "../factories/EntityFactory.js";
 import { LargeSquare } from "../entities/enemies/LargeSquare.js";
+import { SmallBall } from "../entities/enemies/SmallBall.js";
 import { EnemiesOrchestrator } from "../managers/EnemiesOrchestrator.js";
 
 import { Hero } from "../entities/Hero.js";
 import { BulletManager } from "../managers/BulletManager.js";
 import { EnemiesManager } from "../managers/EnemiesManager.js";
 import { CollisionManager } from "../managers/CollisionManager.js";
+import { getRandomNumberBetween } from "../utils.js";
 
 export class Game {
   constructor(htmlElement) {
@@ -23,13 +25,13 @@ export class Game {
     // maybe for code cleanness it could move to another file
     // like game setup
     this.entities = {
-      hero: new Hero(0, 100, 50, 50, "brown", 5), // this should be in a hero factory
+      hero: new Hero(20, 100, 50, 50, "brown", 5), // this should be in a hero factory
       enemies: {
         largeSquares: {
-          largeSquarePool: new LargeSquareFactory(
-            2,
-            LargeSquare
-          ).produceEntities()
+          largeSquarePool: new EntityFactory(4, LargeSquare).produceEntities()
+        },
+        smallBalls: {
+          smallBallPool: new EntityFactory(10, SmallBall).produceEntities()
         },
 
         enemiesDisplayed: []
@@ -54,7 +56,7 @@ export class Game {
     );
     // this is only working for large squares needs to be refactored
     this.enemiesManager = new EnemiesManager(
-      this.entities.enemies.largeSquares.largeSquarePool,
+      this.entities.enemies.smallBalls.smallBallPool,
       this.entities.enemies.enemiesDisplayed
     );
     // Input
@@ -97,11 +99,12 @@ export class Game {
     window.addEventListener("click", mouseclick, false);
 
     // Create enemies randomly
+    const interval = getRandomNumberBetween(600, 1000);
     setInterval(() => {
       try {
         this.enemiesManager.enableEnemy(this.canvas);
       } catch (error) {}
-    }, 1000);
+    }, interval);
 
     // canvas drawing and updating
     this.gameDraw();
@@ -152,7 +155,7 @@ export class Game {
     // check if hero has collided
     this.collisionManager.heroCollision();
     // Orchestrate enemies appearance
-    this.enemiesOrchestrator.orchestrate();
+    //this.enemiesOrchestrator.orchestrate();
     // Manage enemies movement
     for (let i = 0; i < this.entities.enemies.enemiesDisplayed.length; i++) {
       const enemy = this.entities.enemies.enemiesDisplayed[i];
