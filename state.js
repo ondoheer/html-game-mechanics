@@ -5,5 +5,6 @@ export var state = {
   input: undefined,
   gameOver: false,
   currentLevel: 1,
-  finishedGame: false
+  finishedGame: false,
+  enemiesKilled: 0
 };

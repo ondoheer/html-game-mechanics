@@ -5,7 +5,7 @@ export class Enemy extends Entity {
   constructor(x, y, width, height, color, speed, hits, direction) {
     super(x, y, width, height, color, speed, direction);
     this.baseHits = hits;
-    //this.hits = hits;
+    this.hits = hits;
     this.hitAnimationTicking = 0;
   }
   getHit(dmg = 1) {
@@ -14,7 +14,6 @@ export class Enemy extends Entity {
     if (this.isDead()) {
       this.destroy();
     }
-    console.log(this);
   }
 
   isDead() {

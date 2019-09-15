@@ -35,7 +35,7 @@ export class Entity {
    */
   destroy() {
     this.recall();
-    console.log(`I ${this.constructor.name} have been destroyed`);
+    //console.log(`I ${this.constructor.name} have been destroyed`);
   }
   /**
    * Returns the 4 points defining an entity area

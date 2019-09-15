@@ -15,6 +15,7 @@ export class CollisionManager {
       if (bullet.isColliding(enemy)) {
         enemy.getHit(bullet.dmg);
         bullet.destroy();
+
         break;
       }
     }

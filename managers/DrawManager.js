@@ -1,3 +1,4 @@
+import { state } from "../state.js";
 export class DrawManager {
   constructor(canvas, bulletManager, enemiesManager, entities) {
     this.canvas = canvas;
@@ -27,6 +28,14 @@ export class DrawManager {
   gameOver() {
     this.ctx.font = "50px serif";
     this.ctx.fillText("Game Over", 300, 90);
+  }
+  killedEnemiesCounter() {
+    this.ctx.font = "20px serif";
+    this.ctx.fillText(
+      `Enemies Killed: ${state.enemiesKilled}`,
+      this.canvasWidth - 200,
+      30
+    );
   }
   /**
    * Calls the draw function individually for all existing bullets
@@ -88,6 +97,7 @@ export class DrawManager {
         // Será este el mejor sitio para ejecutar esto?
         enemy.destroy();
         enemy.reset();
+        state.enemiesKilled += 1;
       }
     }
   }
@@ -114,5 +124,6 @@ export class DrawManager {
     this.drawExistingEntities();
     this.disableEntities();
     this.blockHeroMovement();
+    this.killedEnemiesCounter();
   }
 }

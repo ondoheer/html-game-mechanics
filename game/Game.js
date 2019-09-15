@@ -82,6 +82,7 @@ export class Game {
     this.drawManager.gameOver();
     console.log("GAMEOVER");
   }
+
   init() {
     // controls
     window.addEventListener("keydown", keydown, false);
