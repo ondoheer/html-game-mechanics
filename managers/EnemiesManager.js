@@ -18,5 +18,6 @@ export class EnemiesManager extends PoolOfEntitiesManager {
     entity.y = startingPosition.y;
     entity._state.exists = true;
     this.entitiesDisplayed.push(entity);
+    entity.setTravelSpeed();
   }
 }

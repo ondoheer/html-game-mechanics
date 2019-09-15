@@ -134,6 +134,7 @@ export class Game {
 
   update(progress) {
     //ctx.save();
+    // manage hero on the screen
     this.inputManager.handleInput();
     this.entities.hero.update();
     // Update all the bullets on screen
@@ -151,9 +152,12 @@ export class Game {
     // check if hero has collided
     this.collisionManager.heroCollision();
     // Orchestrate enemies appearance
-
     this.enemiesOrchestrator.orchestrate();
-
+    // Manage enemies movement
+    for (let i = 0; i < this.entities.enemies.enemiesDisplayed.length; i++) {
+      const enemy = this.entities.enemies.enemiesDisplayed[i];
+      enemy.travel();
+    }
     //ctx.restore();
   }
 }

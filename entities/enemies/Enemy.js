@@ -28,6 +28,4 @@ export class Enemy extends Entity {
     // Deberían ir dentro de draw
     // o debería tener consciencia de en que frame se encuentra
   }
-
-  // CollisionManager should be here
 }
