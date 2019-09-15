@@ -89,7 +89,7 @@ export class Game {
     window.addEventListener("click", mouseclick, false);
 
     // Create enemies
-    //this.enemiesManager.enableEntity(120, 70);
+    this.enemiesManager.enableEntity(120, 70);
 
     // canvas drawing and updating
     this.gameDraw();
@@ -136,6 +136,7 @@ export class Game {
     // check if hero has collided
     this.collisionManager.heroCollision();
     // Orchestrate enemies appearance
+
     this.enemiesOrchestrator.orchestrate();
 
     //ctx.restore();
