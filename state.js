@@ -6,5 +6,6 @@ export var state = {
   gameOver: false,
   currentLevel: 1,
   finishedGame: false,
-  enemiesKilled: 0
+  enemiesKilled: 0,
+  winCondition: 2
 };

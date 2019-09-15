@@ -13,6 +13,7 @@ export class Entity {
     this.xVelocity = 0;
     this.height = height;
     this.width = width;
+    this.baseColor = color;
     this.color = color;
     this.speed = speed;
     this.direction = direction;

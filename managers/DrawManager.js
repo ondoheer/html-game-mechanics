@@ -18,9 +18,9 @@ export class DrawManager {
   /**
    * Draws a you beat the game text
    */
-  finishedGame() {
-    this.ctx.font = "80px serif";
-    this.ctx.fillText("You beat this game!!!!", 300, 90);
+  gameWon() {
+    this.ctx.font = "50px sans";
+    this.ctx.fillText("You beat this game!!!!", 200, 90);
   }
   /**
    * Draws a game over text

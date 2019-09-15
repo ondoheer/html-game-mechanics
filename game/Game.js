@@ -82,6 +82,13 @@ export class Game {
     this.drawManager.gameOver();
     console.log("GAMEOVER");
   }
+  gameWon() {
+    this.drawManager.gameWon();
+    console.log("YOU WON");
+  }
+  winCondition() {
+    return this.state.enemiesKilled == this.state.winCondition;
+  }
 
   init() {
     // controls
@@ -113,6 +120,9 @@ export class Game {
      */
     if (this.state.gameOver) {
       this.gameOver();
+      window.cancelAnimationFrame(requestId);
+    } else if (this.winCondition()) {
+      this.gameWon();
       window.cancelAnimationFrame(requestId);
     }
   }

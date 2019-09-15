@@ -10,6 +10,7 @@ export class Enemy extends Entity {
   }
   getHit(dmg = 1) {
     this.hitAnimation();
+    this.color = this.baseColor;
     this.hits -= dmg;
     if (this.isDead()) {
       this.destroy();
@@ -21,10 +22,11 @@ export class Enemy extends Entity {
   }
   reset() {
     this.hits = this.baseHits;
+    this.color = this.baseColor;
   }
   hitAnimation() {
     // Deberían ir dentro de draw
-    this.hitAnimationTicking += 1;
+    // o debería tener consciencia de en que frame se encuentra
   }
 
   // CollisionManager should be here
