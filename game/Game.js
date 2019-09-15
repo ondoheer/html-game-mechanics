@@ -89,7 +89,8 @@ export class Game {
     window.addEventListener("click", mouseclick, false);
 
     // Create enemies
-    this.enemiesManager.enableEntity(120, 70);
+
+    this.enemiesManager.enableEntity(this.canvas);
 
     // canvas drawing and updating
     this.gameDraw();
