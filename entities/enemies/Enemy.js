@@ -4,7 +4,8 @@ export class Enemy extends Entity {
   // adds hits
   constructor(x, y, width, height, color, speed, hits, direction) {
     super(x, y, width, height, color, speed, direction);
-    this.hits = hits;
+    this.baseHits = hits;
+    //this.hits = hits;
     this.hitAnimationTicking = 0;
   }
   getHit(dmg = 1) {
@@ -13,12 +14,15 @@ export class Enemy extends Entity {
     if (this.isDead()) {
       this.destroy();
     }
+    console.log(this);
   }
 
   isDead() {
     return this.hits <= 0;
   }
-
+  reset() {
+    this.hits = this.baseHits;
+  }
   hitAnimation() {
     // Deberían ir dentro de draw
     this.hitAnimationTicking += 1;

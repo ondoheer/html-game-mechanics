@@ -7,7 +7,8 @@ export class LargeSquare extends Enemy {
     this.height = 80;
     this.color = "#fafafa";
     this.speed = 7;
-    this.hits = 5;
+    this.baseHits = 5;
+    this.hits = this.baseHits;
     this.direction = LEFT_DIRECTION;
   }
 }

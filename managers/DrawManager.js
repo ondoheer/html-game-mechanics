@@ -87,6 +87,7 @@ export class DrawManager {
         this.enemiesManager.disableEntity(i);
         // Será este el mejor sitio para ejecutar esto?
         enemy.destroy();
+        enemy.reset();
       }
     }
   }

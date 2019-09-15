@@ -27,7 +27,7 @@ export class Game {
       enemies: {
         largeSquares: {
           largeSquarePool: new LargeSquareFactory(
-            10,
+            2,
             LargeSquare
           ).produceEntities()
         },
@@ -88,9 +88,12 @@ export class Game {
     window.addEventListener("keyup", keyup, false);
     window.addEventListener("click", mouseclick, false);
 
-    // Create enemies
-
-    this.enemiesManager.enableEntity(this.canvas);
+    // Create enemies randomly
+    setInterval(() => {
+      try {
+        this.enemiesManager.enableEnemy(this.canvas);
+      } catch (error) {}
+    }, 1000);
 
     // canvas drawing and updating
     this.gameDraw();

@@ -29,6 +29,7 @@ export class Entity {
   recall() {
     this._state.exists = false;
   }
+
   /**
    * calls recall and triggers any kind of animation
    */
