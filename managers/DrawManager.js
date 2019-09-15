@@ -30,7 +30,8 @@ export class DrawManager {
     this.ctx.fillText("Game Over", 300, 90);
   }
   killedEnemiesCounter() {
-    this.ctx.font = "20px serif";
+    this.ctx.font = "20px sans";
+    this.ctx.fillStyle = "#fff";
     this.ctx.fillText(
       `Enemies Killed: ${state.enemiesKilled}`,
       this.canvasWidth - 200,
