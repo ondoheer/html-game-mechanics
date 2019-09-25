@@ -68,9 +68,9 @@ export class Entity {
   /**
    * Changes x and y positions for the entity so it can be drawn in a new place
    */
-  travel() {
-    this.x += this.xVelocity;
-    this.y += this.yVelocity;
+  travel(progress) {
+    this.x += this.xVelocity * progress;
+    this.y += this.yVelocity * progress;
   }
   /**
    * Determines if this is colliding with another Entity entity
@@ -99,9 +99,9 @@ export class Entity {
   /**
    * This updates the entity position and state so it can be drawn
    */
-  update() {
+  update(progress) {
     this.setTravelSpeed();
-    this.travel();
+    this.travel(progress);
   }
   /**
    * This draws the entity in the canvas context

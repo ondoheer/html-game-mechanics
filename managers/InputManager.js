@@ -19,7 +19,7 @@ export class InputManager {
     this.bulletManager.enableEntity(bulletCoords.x, bulletCoords.y);
   }
 
-  handleInput() {
+  handleInput(progress) {
     switch (state.input) {
       case MOVE_RIGHT_PRESSED:
         this.hero.moveRight();
@@ -35,7 +35,7 @@ export class InputManager {
         this.hero.stopMoving();
         break;
       case JUMP_PRESSED:
-        this.hero.jump();
+        this.hero.jump(progress);
         break;
       case JUMP_RELEASED:
         // unused now, helps with special stuff done while in the air;

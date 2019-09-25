@@ -1,16 +1,18 @@
-import { CHARACTER_SIZE } from "../config/entities.js";
 import { Entity } from "./Entity.js";
-import { JUMP_SPEED, JUMP_MAX_HEIGHT } from "../config/entities.js";
-import { state } from "../state.js";
+import {
+  JUMP_SPEED,
+  JUMP_MAX_HEIGHT,
+  LEFT_DIRECTION,
+  RIGHT_DIRECTION
+} from "../config/entities.js";
+
 import { canvasWidth, canvasHeight } from "../main.js";
-import { LEFT_DIRECTION, RIGHT_DIRECTION } from "../config/entities.js";
+
 export class Hero extends Entity {
   constructor(x, y, width, height, color, speed) {
     super(x, y, width, height, color, speed);
     this.jumpSpeed = JUMP_SPEED;
     this.jumpMaxHeight = JUMP_MAX_HEIGHT;
-    this.height = CHARACTER_SIZE;
-    this.width = CHARACTER_SIZE;
   }
   /**
    * Checks if character has reached the right canvas boundary
@@ -38,7 +40,7 @@ export class Hero extends Entity {
    * checks if Y coord is the starting position
    */
   isStandingOnGround() {
-    return canvasHeight - this.height == this.y; // 150 - 50 == 100
+    return canvasHeight - this.height <= this.y; // 150 - 50 == 100
   }
   /**
    * Updates the Hero Y position, once it has reached the most he can jump,
@@ -46,20 +48,22 @@ export class Hero extends Entity {
    * It updates the state isJumping property no podemos poner un while loop aquí porque acelera todo
    * necesito otra forma de controlar el máximo salto y el estado
    */
-  jump() {
+  jump(progress) {
     if (!this.reachedMaxJumpHeight()) {
-      this.yVelocity = -this.jumpSpeed;
+      console.log(`jumpspeed ${this.jumpSpeed} * ${progress}`);
+      this.yVelocity = -this.jumpSpeed * progress;
       this._state.isJumping = true;
     }
+    console.log(this);
   }
   stopJumping() {
     this.yVelocity = 0;
     this._state.isJumping = false;
     this._state.isFalling = true;
   }
-  fall() {
+  fall(progress) {
     if (!this.isStandingOnGround()) {
-      this.yVelocity = this.jumpSpeed;
+      this.yVelocity = this.jumpSpeed * progress;
     }
   }
   stopFalling() {
@@ -88,29 +92,29 @@ export class Hero extends Entity {
     return { x, y };
   }
 
-  updateCoordSpeeds() {
-    this.x += this.xVelocity;
-    this.y += this.yVelocity;
+  updateCoordSpeeds(progress) {
+    this.x += this.xVelocity * progress;
+    this.y += this.yVelocity * progress;
   }
 
   // this should be part of the world
-  updateGravity() {
+  updateGravity(progress) {
     if (this.reachedMaxJumpHeight()) {
       this.stopJumping();
     }
     if (this._state.isFalling) {
-      this.fall();
+      this.fall(progress);
     }
     if (this.isStandingOnGround()) {
       this.stopFalling();
     }
   }
-  updatePosition() {
-    this.updateCoordSpeeds();
-    this.updateGravity();
+  updatePosition(progress) {
+    this.updateCoordSpeeds(progress);
+    this.updateGravity(progress);
   }
 
-  update() {
-    this.updatePosition();
+  update(progress) {
+    this.updatePosition(progress);
   }
 }

@@ -5,6 +5,7 @@ import { keydown, keyup, mouseclick } from "../controls.js";
 import { BulletFactory } from "../factories/BulletFactory.js";
 import { NormalBullet } from "../entities/gameItems/Bullet.js";
 import { NUMBER_OF_BULLETS } from "../config/elements.js";
+import { HERO_SPEED } from "../config/entities.js";
 import { EntityFactory } from "../factories/EntityFactory.js";
 import { LargeSquare } from "../entities/enemies/LargeSquare.js";
 import { SmallBall } from "../entities/enemies/SmallBall.js";
@@ -25,7 +26,7 @@ export class Game {
     // maybe for code cleanness it could move to another file
     // like game setup
     this.entities = {
-      hero: new Hero(20, 100, 50, 50, "brown", 5), // this should be in a hero factory
+      hero: new Hero(20, 100, 50, 50, "brown", HERO_SPEED), // this should be in a hero factory
       enemies: {
         largeSquares: {
           largeSquarePool: new EntityFactory(4, LargeSquare).produceEntities()
@@ -44,7 +45,7 @@ export class Game {
         bulletsDisplayed: []
       }
     };
-
+    console.log(this.entities.hero);
     /**
      * managers and Orchestrators
      */
@@ -138,15 +139,15 @@ export class Game {
   update(progress) {
     //ctx.save();
     // manage hero on the screen
-    this.inputManager.handleInput();
-    this.entities.hero.update();
+    this.inputManager.handleInput(progress);
+    this.entities.hero.update(progress);
     // Update all the bullets on screen
     for (
       let bullet = 0;
       bullet < this.entities.bullets.bulletsDisplayed.length;
       bullet++
     ) {
-      this.entities.bullets.bulletsDisplayed[bullet].update();
+      this.entities.bullets.bulletsDisplayed[bullet].update(progress);
 
       this.collisionManager.bulletCollision(
         this.entities.bullets.bulletsDisplayed[bullet]
@@ -159,7 +160,7 @@ export class Game {
     // Manage enemies movement
     for (let i = 0; i < this.entities.enemies.enemiesDisplayed.length; i++) {
       const enemy = this.entities.enemies.enemiesDisplayed[i];
-      enemy.travel();
+      enemy.travel(progress);
     }
     //ctx.restore();
   }

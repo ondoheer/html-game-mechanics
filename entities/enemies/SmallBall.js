@@ -7,7 +7,7 @@ export class SmallBall extends Enemy {
     this.height = 25;
     this.baseColor = "#45fe87";
     this.color = "#45fe87";
-    this.speed = 3;
+    this.speed = 0.2;
     this.baseHits = 1;
     this.hits = this.baseHits;
     this.direction = LEFT_DIRECTION;
